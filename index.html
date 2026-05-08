@@ -69,6 +69,8 @@
     }
     .section-marker .slash { opacity: 0.4; }
     .section-marker .label { color: var(--muted); }
+    .section-marker > span:first-child { color: #B84A20; }
+    .cta .section-marker > span:first-child { color: #B84A20; }
 
     .pill {
       display: inline-flex;
@@ -595,7 +597,7 @@
       align-items: center;
       font-size: 12px;
       color: var(--muted);
-      border-top: 1px solid var(--rule);
+      border-top: 1px solid #B84A20;
     }
     .site-footer a { color: var(--muted); transition: color 0.15s; }
     .site-footer a:hover { color: var(--accent); }
@@ -655,7 +657,7 @@
     <!-- NAVIGATION -->
     <nav class="nav">
       <div style="display:flex;align-items:center;gap:20px;flex-shrink:0;">
-        <a href="/">
+        <a href="/" style="border-left: 3px solid #B84A20; display:flex; align-items:center;">
           <img src="assets/mai-nav-logo.svg" alt="Masters AI" style="height: 64px; width: auto; max-width: none; flex-shrink:0;">
         </a>
         <span class="nav-divider" style="width:1px;height:28px;background:rgba(245,239,227,0.15);display:block;flex-shrink:0;"></span>
@@ -729,7 +731,7 @@
             <path d="M34 12 L34 28 L20 36 L20 20 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
           </svg>
           <div class="strand-header">
-            <div class="strand-num">01</div>
+            <div class="strand-num" style="color: #B84A20;">01</div>
             <div class="strand-tag">Strand</div>
           </div>
           <h3>AI Readiness &amp; Strategy</h3>
