@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Masters AI</title>
+  <meta name="description" content="Get in touch with Masters AI. We respond within one business day." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300..900;1,8..60,300..900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ── Design Tokens ─────────────────────────────────────────────── */
+    :root {
+      --bg:           #F5EFE3;
+      --bg2:          #FAF6EC;
+      --panel:        #FFFFFF;
+      --panel-dark:   #0E1E3A;
+      --panel-dark2:  #142B52;
+      --fg:           #0E1E3A;
+      --muted:        #6B6256;
+      --accent:       #1F77E0;
+      --accent-light: #7FB6FF;
+      --rule:         #E0D6C4;
+
+      --display: 'Source Serif 4', 'Source Serif Pro', Georgia, serif;
+      --body:    Inter, system-ui, sans-serif;
+      --mono:    'JetBrains Mono', ui-monospace, monospace;
+    }
+
+    /* ── Reset ─────────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--body);
+      line-height: 1.5;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ── Layout shell ───────────────────────────────────────────────── */
+    .site-wrapper {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 32px;
+    }
+
+    /* ── Pills ──────────────────────────────────────────────────────── */
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-family: var(--body);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+    .pill:hover { opacity: 0.8; }
+    .pill--nav    { background: var(--bg2); color: var(--panel-dark); border: none; }
+    .pill--active { background: var(--accent); color: #fff; border: none; }
+    .pill--active:hover { opacity: 0.9; }
+
+    /* ── Navigation ─────────────────────────────────────────────────── */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 32px;
+      background: var(--panel-dark);
+      border-radius: 6px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+      font-size: 13px;
+      color: var(--bg2);
+      list-style: none;
+    }
+    .nav-links a { color: var(--bg2); transition: opacity 0.15s; }
+    .nav-links a:hover { opacity: 0.7; }
+
+    /* ── Kicker ─────────────────────────────────────────────────────── */
+    .kicker {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      text-transform: uppercase;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .kicker--light { color: rgba(245,239,227,0.45); }
+    .kicker--light .dot { background: var(--accent-light); }
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+      display: inline-block;
+      animation: dotPulse 2.4s infinite;
+      flex-shrink: 0;
+    }
+    @keyframes dotPulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.4; transform: scale(0.75); }
+    }
+
+    /* ── Page hero ──────────────────────────────────────────────────── */
+    .contact-hero {
+      background: var(--panel);
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+      padding: 56px 64px;
+      margin-top: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    .contact-hero h1 {
+      font-family: var(--display);
+      font-size: clamp(48px, 5vw, 72px);
+      font-weight: 400;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+    }
+    .contact-hero h1 em { color: var(--accent); font-style: normal; }
+    .contact-hero .lede {
+      font-size: 16px;
+      color: var(--muted);
+      max-width: 540px;
+      line-height: 1.6;
+    }
+
+    /* ── Contact grid ───────────────────────────────────────────────── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.35fr;
+      gap: 16px;
+      margin-top: 16px;
+      align-items: stretch;
+    }
+
+    /* ── Channels panel (dark) ──────────────────────────────────────── */
+    .channels-panel {
+      background: var(--panel-dark);
+      border-radius: 4px;
+      padding: 48px;
+      color: var(--bg);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: default;
+    }
+    .channels-panel:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.22);
+    }
+    .channels-panel h2 {
+      font-family: var(--display);
+      font-size: 36px;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin: 14px 0 16px;
+      color: var(--bg);
+    }
+    .channels-panel h2 .em { color: var(--accent-light); font-style: italic; font-family: var(--display); }
+    .channels-panel > p {
+      font-size: 14px;
+      line-height: 1.6;
+      color: rgba(245,239,227,0.65);
+      margin-bottom: 32px;
+    }
+
+    .contact-channels { display: flex; flex-direction: column; }
+    .channel {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      transition: padding-left 0.15s;
+    }
+    .channel:first-child { border-top: 1px solid rgba(255,255,255,0.08); }
+    .channel:hover { padding-left: 4px; }
+    .channel .channel-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(245,239,227,0.45);
+      margin-bottom: 3px;
+    }
+    .channel .channel-value { font-size: 13px; color: var(--bg); }
+    .channel .arr {
+      font-family: var(--mono);
+      font-size: 14px;
+      color: var(--accent-light);
+      opacity: 0.7;
+      flex-shrink: 0;
+      margin-left: 16px;
+      transition: transform 0.2s, opacity 0.2s;
+    }
+    .channel:hover .arr { transform: translateX(3px); opacity: 1; }
+
+    .channels-meta {
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .meta-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(245,239,227,0.4);
+      margin-bottom: 6px;
+    }
+    .meta-value { font-size: 14px; color: var(--bg); }
+
+    /* ── Form panel (white) ─────────────────────────────────────────── */
+    .form-panel {
+      background: var(--panel);
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+      padding: 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: default;
+    }
+    .form-panel:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+    }
+    .form-panel h2 {
+      font-family: var(--display);
+      font-size: 36px;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-top: 10px;
+    }
+    .form-panel h2 .em { color: var(--accent); font-style: italic; font-family: var(--display); }
+
+    .form-fields { display: flex; flex-direction: column; gap: 16px; }
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .field { display: flex; flex-direction: column; gap: 6px; }
+    .field label {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .field input,
+    .field select,
+    .field textarea {
+      font-family: var(--body);
+      font-size: 14px;
+      color: var(--fg);
+      background: var(--bg2);
+      border: 1px solid var(--rule);
+      border-radius: 3px;
+      padding: 10px 12px;
+      outline: none;
+      transition: border-color 0.15s, background 0.15s;
+      width: 100%;
+    }
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: var(--accent);
+      background: var(--panel);
+    }
+    .field textarea { resize: vertical; line-height: 1.5; }
+    .field select { appearance: none; cursor: pointer; }
+
+    .btn-submit {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      background: var(--fg);
+      color: var(--bg2);
+      border: none;
+      border-radius: 999px;
+      font-family: var(--body);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      transition: opacity 0.15s;
+      align-self: flex-start;
+    }
+    .btn-submit:hover { opacity: 0.8; }
+    .btn-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+    .btn-submit .arr { font-family: var(--mono); transition: transform 0.2s; }
+    .btn-submit:hover .arr { transform: translateX(2px); }
+
+    /* ── Success state ──────────────────────────────────────────────── */
+    .form-success {
+      display: none;
+      grid-column: 1 / -1;
+      background: var(--panel);
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+      padding: 80px 64px;
+      text-align: center;
+    }
+    .form-success .thanks {
+      font-family: var(--display);
+      font-size: 64px;
+      font-weight: 400;
+      color: var(--accent);
+      font-style: italic;
+      line-height: 1;
+    }
+    .form-success p { margin-top: 16px; color: var(--muted); font-size: 16px; }
+
+    /* ── Footer ─────────────────────────────────────────────────────── */
+    .site-footer {
+      margin-top: 32px;
+      padding: 24px 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: var(--muted);
+      border-top: 1px solid var(--rule);
+    }
+    .site-footer a { color: var(--muted); transition: color 0.15s; }
+    .site-footer a:hover { color: var(--accent); }
+
+    /* ── Mobile responsive ───────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .site-wrapper { padding: 12px; }
+
+      /* Nav */
+      .nav { padding: 14px 16px; flex-wrap: wrap; gap: 10px; }
+      .nav-links { gap: 16px; font-size: 12px; }
+      .nav-tagline, .nav-divider { display: none; }
+
+      /* Contact hero */
+      .contact-hero { padding: 32px 24px; gap: 14px; }
+
+      /* Contact grid */
+      .contact-grid { grid-template-columns: 1fr; }
+      .channels-panel { padding: 28px 24px; }
+      .channels-panel h2 { font-size: 26px; }
+      .channels-meta { grid-template-columns: 1fr; gap: 16px; }
+
+      /* Form panel */
+      .form-panel { padding: 28px 24px; }
+      .form-panel h2 { font-size: 26px; }
+      .field-row { grid-template-columns: 1fr; }
+
+      /* Footer */
+      .site-footer { flex-direction: column; gap: 6px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="site-wrapper">
+
+    <!-- NAVIGATION -->
+    <nav class="nav">
+      <div style="display:flex;align-items:center;gap:20px;flex-shrink:0;">
+        <a href="index.html">
+          <img src="assets/mai-logo-dark.svg" alt="Masters AI" style="height: 56px; width: auto; max-width: none; flex-shrink:0;">
+        </a>
+        <span class="nav-divider" style="width:1px;height:28px;background:rgba(245,239,227,0.15);display:block;flex-shrink:0;"></span>
+        <span class="nav-tagline" style="font-family:var(--mono);font-size:11px;letter-spacing:0.1em;color:rgba(245,239,227,0.55);text-transform:uppercase;">AI Strategy · AI Implementation · AI Governance</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#services">Services</a></li>
+        <li><a href="index.html#about">About</a></li>
+      </ul>
+    </nav>
+
+    <!-- PAGE HERO -->
+    <div class="contact-hero">
+      <svg style="position:absolute;right:-20px;top:-20px;opacity:0.07;pointer-events:none;" width="280" height="280" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+        <path d="M20 4 L34 12 L20 20 L6 12 Z" stroke="#1F77E0" stroke-width="1" stroke-linejoin="round" fill="none"/>
+        <path d="M6 12 L6 28 L20 36 L20 20 Z" stroke="#1F77E0" stroke-width="1" stroke-linejoin="round" fill="none"/>
+        <path d="M34 12 L34 28 L20 36 L20 20 Z" stroke="#1F77E0" stroke-width="1" stroke-linejoin="round" fill="none"/>
+        <circle cx="20" cy="4"  r="1.7" fill="#1F77E0"/>
+        <circle cx="34" cy="12" r="1.7" fill="#1F77E0"/>
+        <circle cx="6"  cy="12" r="1.7" fill="#1F77E0"/>
+        <circle cx="20" cy="20" r="1.7" fill="#1F77E0"/>
+        <circle cx="34" cy="28" r="1.7" fill="#1F77E0"/>
+        <circle cx="6"  cy="28" r="1.7" fill="#1F77E0"/>
+        <circle cx="20" cy="36" r="1.7" fill="#1F77E0"/>
+      </svg>
+      <div class="kicker"><span class="dot"></span>Contact · Melbourne, Australia</div>
+      <h1>Let's have a<br><em>conversation.</em></h1>
+      <p class="lede">Whether you have a clear brief or just a question, get in touch to discuss how we can help.</p>
+    </div>
+
+    <!-- CONTACT GRID -->
+    <div class="contact-grid">
+
+      <!-- Channels panel -->
+      <div class="channels-panel">
+        <div class="kicker kicker--light"><span class="dot"></span>Direct line</div>
+        <h2>Talk to <span class="em" style="font-style:normal">Ben <em>directly.</em></span></h2>
+        <p>All engagements begin with a conversation with the director, so you get straight answers and consistent guidance from day one.</p>
+
+        <div class="contact-channels">
+          <a href="mailto:ben@mastersai.com" class="channel">
+            <div>
+              <div class="channel-label">Email</div>
+              <div class="channel-value">ben@mastersai.com</div>
+            </div>
+            <span class="arr">↗</span>
+          </a>
+          <a href="tel:+61420452650" class="channel">
+            <div>
+              <div class="channel-label">Phone</div>
+              <div class="channel-value">+61 420 452 650</div>
+            </div>
+            <span class="arr">↗</span>
+          </a>
+          <a href="https://www.linkedin.com/in/ben-williams-5b02a45/" target="_blank" rel="noopener" class="channel">
+            <div>
+              <div class="channel-label">LinkedIn</div>
+              <div class="channel-value">linkedin.com/in/ben-williams-5b02a45/</div>
+            </div>
+            <span class="arr">↗</span>
+          </a>
+        </div>
+
+        <div class="channels-meta">
+          <div>
+            <div class="meta-label">Based in</div>
+            <div class="meta-value">Melbourne, Australia</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form panel -->
+      <form class="form-panel" id="contact-form" action="https://formspree.io/f/mykoknnl" method="POST">
+        <div>
+          <div class="kicker"><span class="dot"></span>Send a message</div>
+          <h2>Or drop us a <span class="em" style="font-style:normal">quick note.</span></h2>
+        </div>
+
+        <div class="form-fields">
+          <div class="field-row">
+            <div class="field">
+              <label for="name">Name</label>
+              <input id="name" name="name" type="text" required />
+            </div>
+            <div class="field">
+              <label for="company">Company</label>
+              <input id="company" name="company" type="text" />
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" required />
+          </div>
+
+          <div class="field">
+            <label for="topic">What's it about?</label>
+            <select id="topic" name="topic">
+              <option>AI Readiness &amp; Strategy</option>
+              <option>Managed AI Implementation</option>
+              <option>Fractional Leadership</option>
+              <option>Not sure yet — exploring</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="message">Tell us a bit more</label>
+            <textarea id="message" name="message" rows="5" placeholder="How can we help?"></textarea>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-submit">
+          Send <span class="arr">→</span>
+        </button>
+      </form>
+
+      <!-- Success state (hidden) -->
+      <div class="form-success" id="form-success">
+        <div class="thanks">Thanks.</div>
+        <p>We've got it — Ben will be in touch shortly.</p>
+      </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <span>© 2026 Masters AI Pty Ltd</span>
+      <span>Melbourne, Australia</span>
+    </footer>
+
+  </div>
+
+  <script>
+    // Pre-fill form topic from query string ?topic=
+    const params = new URLSearchParams(location.search);
+    const t = params.get('topic');
+    if (t) {
+      const map = { strategy: 0, implementation: 1, leadership: 2 };
+      if (t in map) document.getElementById('topic').selectedIndex = map[t];
+    }
+
+    // Formspree submission
+    const form = document.getElementById('contact-form');
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const btn = form.querySelector('button[type="submit"]');
+      btn.disabled = true;
+      btn.innerHTML = 'Sending…';
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          document.getElementById('form-success').style.display = 'block';
+          form.style.display = 'none';
+        } else {
+          btn.disabled = false;
+          btn.innerHTML = 'Send <span class="arr">→</span>';
+          alert('Something went wrong. Please email ben@mastersai.com directly.');
+        }
+      } catch (err) {
+        btn.disabled = false;
+        btn.innerHTML = 'Send <span class="arr">→</span>';
+        alert('Something went wrong. Please email ben@mastersai.com directly.');
+      }
+    });
+  </script>
+
+</body>
+</html>

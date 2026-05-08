@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Masters AI — AI Strategy, Implementation &amp; Governance</title>
+  <meta name="description" content="Masters AI helps Australian organisations get real value from AI — from assessing readiness to automating workflows to enterprise transformation.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300..900;1,8..60,300..900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ── Design Tokens ─────────────────────────────────────────────── */
+    :root {
+      --bg:           #F5EFE3;
+      --bg2:          #FAF6EC;
+      --panel:        #FFFFFF;
+      --panel-dark:   #0E1E3A;
+      --panel-dark2:  #142B52;
+      --fg:           #0E1E3A;
+      --muted:        #6B6256;
+      --accent:       #1F77E0;
+      --accent-light: #7FB6FF;
+      --rule:         #E0D6C4;
+      --rule-dark:    rgba(245,239,227,0.12);
+
+      --display: 'Source Serif 4', 'Source Serif Pro', Georgia, serif;
+      --body:    Inter, system-ui, sans-serif;
+      --mono:    'JetBrains Mono', ui-monospace, monospace;
+    }
+
+    /* ── Reset ─────────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--body);
+      line-height: 1.5;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ── Layout shell ───────────────────────────────────────────────── */
+    .site-wrapper {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 32px;
+    }
+
+    /* ── Utility classes ────────────────────────────────────────────── */
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    .section-marker {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .section-marker .slash { opacity: 0.4; }
+    .section-marker .label { color: var(--muted); }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-family: var(--body);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+    .pill:hover { opacity: 0.8; }
+    .pill--solid  { background: var(--fg); color: var(--bg2); border: 1px solid var(--fg); }
+    .pill--outline { background: transparent; color: var(--fg); border: 1px solid var(--rule); }
+    .pill--nav    { background: var(--bg2); color: var(--panel-dark); border: none; }
+
+    .cert-chip {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      padding: 4px 9px;
+      border: 1px solid var(--rule);
+      background: var(--bg2);
+    }
+
+    /* ── Cube motif SVG ─────────────────────────────────────────────── */
+    .cube-mark { display: block; flex-shrink: 0; }
+
+    /* ── Section spacing ─────────────────────────────────────────────── */
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-top: 56px;
+      margin-bottom: 20px;
+      padding: 0 8px;
+    }
+    .section-header h2 {
+      font-family: var(--display);
+      font-size: 44px;
+      font-weight: 400;
+      margin: 12px 0 0;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+    .section-header h2 em {
+      color: var(--accent);
+      font-style: italic;
+    }
+    /* Pacing modifiers */
+    .section-header--quiet h2  { font-size: 34px; }
+    .section-header--medium h2 { font-size: 44px; }
+    .section-header--loud h2   { font-size: 52px; }
+
+    /* ── Navigation ─────────────────────────────────────────────────── */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 32px;
+      background: var(--panel-dark);
+      border-radius: 6px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+      font-size: 13px;
+      color: var(--bg2);
+      list-style: none;
+    }
+    .nav-links a { color: var(--bg2); transition: opacity 0.15s; }
+    .nav-links a:hover { opacity: 0.7; }
+    .nav-links .pill--nav { color: var(--panel-dark); }
+    .nav-links .pill--nav:hover { opacity: 0.85; }
+
+    /* ── Hero ────────────────────────────────────────────────────────── */
+    .hero {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 16px;
+      margin-top: 16px;
+    }
+    .hero-main {
+      background: var(--panel);
+      padding: 48px;
+      border-radius: 4px;
+      border: 1px solid var(--rule);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-main-cube {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      opacity: 0.08;
+      pointer-events: none;
+    }
+    .hero-main h1 {
+      font-family: var(--display);
+      font-size: 64px;
+      line-height: 1.05;
+      font-weight: 400;
+      margin: 20px 0 18px;
+      letter-spacing: -0.02em;
+      text-wrap: balance;
+    }
+    .hero-main h1 em { color: var(--accent); font-style: italic; }
+    .hero-main p {
+      font-size: 15px;
+      line-height: 1.55;
+      color: var(--muted);
+      max-width: 520px;
+    }
+    .hero-ctas {
+      display: flex;
+      gap: 10px;
+      margin-top: 28px;
+    }
+    .hero-quote {
+      background: var(--panel-dark);
+      padding: 36px;
+      border-radius: 4px;
+      color: var(--bg);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 380px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: default;
+    }
+    .hero-quote:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.22);
+    }
+    .hero-quote .cube-mark {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      opacity: 0.18;
+    }
+    .hero-quote .eyebrow { color: #E8D9B8; }
+    .hero-quote blockquote {
+      font-family: var(--display);
+      font-size: 27px;
+      line-height: 1.35;
+      font-style: italic;
+      font-weight: 400;
+      margin-bottom: 48px;
+    }
+    .hero-quote blockquote em { color: var(--accent-light); font-style: italic; }
+
+    /* ── Service strands ─────────────────────────────────────────────── */
+    .strands {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+    }
+    .strand {
+      padding: 28px;
+      border-radius: 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: default;
+    }
+    .strand--paper:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+    }
+    .strand--navy:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.22);
+    }
+    .strand--paper {
+      background: var(--panel);
+      border: 1px solid var(--rule);
+      color: var(--fg);
+    }
+    .strand--navy {
+      background: var(--panel-dark);
+      border: 1px solid var(--panel-dark);
+      color: var(--bg);
+    }
+    .strand-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+    .strand-num {
+      font-family: var(--display);
+      font-size: 38px;
+      font-style: italic;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .strand-tag {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 8px;
+    }
+    .strand--paper .strand-tag { color: var(--muted); }
+    .strand--navy  .strand-tag { color: rgba(255,255,255,0.5); }
+    .strand h3 {
+      font-family: var(--display);
+      font-size: 22px;
+      font-weight: 500;
+      line-height: 1.2;
+    }
+    .strand p {
+      font-size: 12.5px;
+      line-height: 1.55;
+      margin: 0;
+    }
+    .strand--paper p { color: var(--muted); }
+    .strand--navy  p { color: rgba(255,255,255,0.7); }
+    .strand-items { margin-top: 6px; }
+    .strand-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      font-size: 13px;
+    }
+    .strand--paper .strand-item { border-bottom: 1px solid var(--rule); color: var(--fg); }
+    .strand--navy  .strand-item { border-bottom: 1px solid rgba(255,255,255,0.08); color: rgba(255,255,255,0.85); }
+    .strand-item .arrow { opacity: 0.5; font-size: 11px; transition: transform 0.2s, opacity 0.2s; }
+    .strand-item { transition: padding 0.15s; }
+    .strand-item:hover { padding-left: 4px; }
+    .strand-item:hover .arrow { transform: translateX(3px); opacity: 1; }
+    .strand-cta { margin-top: 8px; }
+    .strand-cta a {
+      font-size: 12px;
+      padding-bottom: 2px;
+    }
+    .strand--paper .strand-cta a { color: var(--accent); border-bottom: 1px solid var(--accent); }
+    .strand--navy  .strand-cta a { color: var(--accent-light); border-bottom: 1px solid var(--accent-light); }
+
+    /* ── Testimonials ────────────────────────────────────────────────── */
+    .testimonials {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .testimonial {
+      background: var(--bg2);
+      padding: 56px;
+      border-radius: 4px;
+      border: 1px solid var(--rule);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: default;
+    }
+    .testimonial:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    }
+    .testimonial-ornament {
+      position: absolute;
+      top: 12px;
+      left: 24px;
+      font-family: var(--display);
+      font-style: italic;
+      font-size: 180px;
+      color: var(--accent);
+      opacity: 0.22;
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+    }
+    .testimonial-body {
+      position: relative;
+      padding-top: 36px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .testimonial blockquote {
+      font-family: var(--display);
+      font-size: 36px;
+      line-height: 1.3;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+    }
+    .testimonial blockquote em { color: var(--accent); font-style: italic; }
+    .testimonial-footer {
+      margin-top: auto;
+      padding-top: 20px;
+      border-top: 1px solid var(--rule);
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+    .testimonial-attr .name { font-size: 14px; font-weight: 600; color: var(--fg); }
+    .testimonial-attr .role { font-size: 13px; color: var(--muted); margin-top: 2px; }
+    .testimonial-id {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+    .testimonial--dark {
+      background: var(--panel-dark);
+      border-color: var(--panel-dark);
+      color: var(--bg);
+    }
+    .testimonial--dark .testimonial-ornament { color: var(--accent-light); }
+    .testimonial--dark blockquote em { color: var(--accent-light); }
+    .testimonial--dark .testimonial-footer { border-top-color: rgba(255,255,255,0.12); }
+    .testimonial--dark .testimonial-attr .name { color: var(--bg); }
+    .testimonial--dark .testimonial-attr .role { color: rgba(245,239,227,0.6); }
+    .testimonial--dark .testimonial-id { color: rgba(245,239,227,0.4); }
+
+    /* ── Independent Advice ──────────────────────────────────────────── */
+    .advice {
+      margin-top: 16px;
+      background: var(--panel);
+      padding: 40px;
+      border-radius: 4px;
+      border: 1px solid var(--rule);
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 32px;
+      align-items: center;
+    }
+    .advice .cube-mark {
+      position: absolute;
+      bottom: -20px;
+      right: -20px;
+      opacity: 0.08;
+    }
+    .advice h3 {
+      font-family: var(--display);
+      font-size: 32px;
+      font-weight: 400;
+      margin: 12px 0 0;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+    .advice h3 em { color: var(--accent); font-style: normal; }
+    .advice p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    /* ── About ───────────────────────────────────────────────────────── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 16px;
+    }
+    .about-text {
+      background: var(--panel);
+      padding: 36px;
+      border-radius: 4px;
+      border: 1px solid var(--rule);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: default;
+    }
+    .about-text:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+    }
+    .about-text p { font-size: 13px; line-height: 1.6; margin-bottom: 12px; }
+    .about-text p:last-of-type { margin-bottom: 24px; }
+    .about-text p.muted { color: var(--muted); }
+    .about-text strong { font-weight: 600; }
+    .certs { display: flex; flex-wrap: wrap; gap: 6px; }
+    .about-profile {
+      background: var(--panel);
+      padding: 24px;
+      border-radius: 4px;
+      border: 1px solid var(--rule);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: default;
+    }
+    .about-profile:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+    }
+    .portrait img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      object-position: center top;
+      border: 1px solid var(--rule);
+      display: block;
+    }
+    .profile-name {
+      font-family: var(--display);
+      font-size: 22px;
+      font-weight: 500;
+    }
+    .profile-title {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    /* ── In one line + Stats ─────────────────────────────────────────── */
+    .stats-row {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 16px;
+      margin-top: 16px;
+    }
+    .in-one-line {
+      background: var(--panel-dark);
+      color: var(--bg);
+      padding: 32px;
+      border-radius: 4px;
+      position: relative;
+      overflow: hidden;
+    }
+    .in-one-line .cube-mark {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      opacity: 0.2;
+    }
+    .in-one-line .eyebrow { color: #E8D9B8; }
+    .in-one-line blockquote {
+      font-family: var(--display);
+      font-size: 36px;
+      line-height: 1.2;
+      margin-top: 14px;
+      font-weight: 400;
+      font-style: normal;
+    }
+    .in-one-line blockquote em { color: var(--accent-light); font-style: italic; }
+
+    .stat-card {
+      background: var(--panel);
+      padding: 28px;
+      border-radius: 4px;
+      border: 1px solid var(--rule);
+    }
+    .stat-num {
+      font-family: var(--display);
+      font-size: 96px;
+      line-height: 1;
+      font-weight: 400;
+      color: var(--fg);
+      letter-spacing: -0.03em;
+    }
+    .stat-label {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.4;
+      max-width: 180px;
+      margin-top: 6px;
+    }
+
+    /* ── CTA ─────────────────────────────────────────────────────────── */
+    .cta {
+      margin-top: 56px;
+      background: var(--panel-dark);
+      padding: 72px;
+      border-radius: 4px;
+      border: none;
+      position: relative;
+      overflow: hidden;
+      color: var(--bg);
+    }
+    .cta .cube-mark {
+      position: absolute;
+      right: 40px;
+      top: 20px;
+      opacity: 0.1;
+    }
+    .cta .section-marker { color: #E8D9B8; }
+    .cta .section-marker .label { color: rgba(245,239,227,0.5); }
+    .cta h2 {
+      font-family: var(--display);
+      font-size: 72px;
+      font-weight: 400;
+      margin: 16px 0 18px;
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+    .cta h2 em { color: var(--accent-light); font-style: italic; }
+    .cta p {
+      font-size: 16px;
+      color: rgba(245,239,227,0.7);
+      max-width: 520px;
+      margin-bottom: 32px;
+    }
+    .pill--cta {
+      background: var(--bg2);
+      color: var(--panel-dark);
+      border: none;
+    }
+
+    /* ── Bottom padding ──────────────────────────────────────────────── */
+    .site-footer {
+      margin-top: 32px;
+      padding: 24px 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: var(--muted);
+      border-top: 1px solid var(--rule);
+    }
+    .site-footer a { color: var(--muted); transition: color 0.15s; }
+    .site-footer a:hover { color: var(--accent); }
+
+    /* ── Mobile responsive ───────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .site-wrapper { padding: 12px; }
+
+      /* Nav */
+      .nav { padding: 14px 16px; flex-wrap: wrap; gap: 10px; }
+      .nav-links { gap: 16px; font-size: 12px; }
+      .nav-tagline, .nav-divider { display: none; }
+
+      /* Hero */
+      .hero { grid-template-columns: 1fr; }
+      .hero-main { padding: 28px 24px; }
+      .hero-main h1 { font-size: 38px; }
+      .hero-quote { min-height: auto; }
+
+      /* Section headers */
+      .section-header { flex-direction: column; align-items: flex-start; gap: 10px; margin-top: 40px; }
+      .section-header h2 { font-size: 30px; }
+      .section-header--quiet h2  { font-size: 26px; }
+      .section-header--medium h2 { font-size: 30px; }
+      .section-header--loud h2   { font-size: 34px; }
+
+      /* Services */
+      .strands { grid-template-columns: 1fr; }
+
+      /* Testimonials */
+      .testimonials { grid-template-columns: 1fr; }
+      .testimonial { padding: 32px 24px; }
+      .testimonial blockquote { font-size: 24px; }
+
+      /* About */
+      .about-grid { grid-template-columns: 1fr; }
+      .advice { grid-template-columns: 1fr; padding: 28px 24px; }
+
+      /* Stats row */
+      .stats-row { grid-template-columns: 1fr 1fr; }
+      .in-one-line { grid-column: 1 / -1; }
+      .in-one-line blockquote { font-size: 26px; }
+      .stat-num { font-size: 56px; }
+
+      /* CTA */
+      .cta { padding: 40px 24px; margin-top: 32px; }
+      .cta h2 { font-size: 40px; }
+
+      /* Footer */
+      .site-footer { flex-direction: column; gap: 6px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="site-wrapper">
+
+    <!-- NAVIGATION -->
+    <nav class="nav">
+      <div style="display:flex;align-items:center;gap:20px;flex-shrink:0;">
+        <a href="/">
+          <img src="assets/mai-logo-dark.svg" alt="Masters AI" style="height: 56px; width: auto; max-width: none; flex-shrink:0;">
+        </a>
+        <span class="nav-divider" style="width:1px;height:28px;background:rgba(245,239,227,0.15);display:block;flex-shrink:0;"></span>
+        <span class="nav-tagline" style="font-family:var(--mono);font-size:11px;letter-spacing:0.1em;color:rgba(245,239,227,0.55);text-transform:uppercase;">AI Strategy · AI Implementation · AI Governance</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">About</a></li>
+        <li>
+          <a href="contact.html" class="pill pill--nav" style="font-size:12px; padding: 10px 16px;">Get in touch ↗</a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" aria-label="Introduction">
+      <div class="hero-main">
+        <svg class="hero-main-cube" width="160" height="160" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+          <path d="M20 4 L34 12 L20 20 L6 12 Z" stroke="#1F77E0" stroke-width="1" stroke-linejoin="round" fill="none"/>
+          <path d="M6 12 L6 28 L20 36 L20 20 Z" stroke="#1F77E0" stroke-width="1" stroke-linejoin="round" fill="none"/>
+          <path d="M34 12 L34 28 L20 36 L20 20 Z" stroke="#1F77E0" stroke-width="1" stroke-linejoin="round" fill="none"/>
+          <circle cx="20" cy="4"  r="1.7" fill="#1F77E0"/>
+          <circle cx="34" cy="12" r="1.7" fill="#1F77E0"/>
+          <circle cx="6"  cy="12" r="1.7" fill="#1F77E0"/>
+          <circle cx="20" cy="20" r="1.7" fill="#1F77E0"/>
+          <circle cx="34" cy="28" r="1.7" fill="#1F77E0"/>
+          <circle cx="6"  cy="28" r="1.7" fill="#1F77E0"/>
+          <circle cx="20" cy="36" r="1.7" fill="#1F77E0"/>
+        </svg>
+        <div class="eyebrow">AI Strategy · AI Implementation · AI Governance</div>
+        <h1>Helping Australian organisations get <em>real value</em> from AI.</h1>
+        <p>Masters AI helps businesses cut through the noise and get real value from artificial intelligence. From assessing readiness and optimising workflows to custom model deployments, our services cover the full implementation lifecycle with a focus on responsible adoption and practical governance.</p>
+        <div class="hero-ctas">
+          <a href="#services" class="pill pill--solid">What we do →</a>
+          <a href="contact.html" class="pill pill--outline">Get in touch</a>
+        </div>
+      </div>
+      <div class="hero-quote" aria-label="Why Masters AI">
+        <!-- Cube mark -->
+        <svg class="cube-mark" width="120" height="120" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+          <path d="M20 4 L34 12 L20 20 L6 12 Z" stroke="white" stroke-width="1" stroke-linejoin="round" fill="none"/>
+          <path d="M6 12 L6 28 L20 36 L20 20 Z" stroke="white" stroke-width="1" stroke-linejoin="round" fill="none"/>
+          <path d="M34 12 L34 28 L20 36 L20 20 Z" stroke="white" stroke-width="1" stroke-linejoin="round" fill="none"/>
+          <circle cx="20" cy="4"  r="1.7" fill="#7FB6FF"/>
+          <circle cx="34" cy="12" r="1.7" fill="#7FB6FF"/>
+          <circle cx="6"  cy="12" r="1.7" fill="#7FB6FF"/>
+          <circle cx="20" cy="20" r="1.7" fill="#7FB6FF"/>
+          <circle cx="34" cy="28" r="1.7" fill="#7FB6FF"/>
+          <circle cx="6"  cy="28" r="1.7" fill="#7FB6FF"/>
+          <circle cx="20" cy="36" r="1.7" fill="#7FB6FF"/>
+        </svg>
+        <div class="eyebrow">§01 / Why Masters AI</div>
+        <blockquote>
+          "Most AI advice comes from people who've never owned the operational risk. Ours comes <em>from those who have.</em>"
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" aria-labelledby="services-heading">
+      <div class="section-header section-header--medium">
+        <div>
+          <div class="eyebrow">How we help</div>
+          <h2 id="services-heading">Three ways to work <em style="font-style:normal">together.</em></h2>
+        </div>
+        <div class="section-marker">
+          <span>§02</span>
+          <span class="slash">/</span>
+          <span class="label">Services</span>
+          <span>→</span>
+          <svg width="18" height="18" viewBox="0 0 40 40" fill="none" aria-hidden="true" style="opacity:0.4;flex-shrink:0;">
+            <path d="M20 4 L34 12 L20 20 L6 12 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+            <path d="M6 12 L6 28 L20 36 L20 20 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+            <path d="M34 12 L34 28 L20 36 L20 20 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+            <circle cx="20" cy="4"  r="1.7" fill="#1F77E0"/>
+            <circle cx="20" cy="20" r="1.7" fill="#1F77E0"/>
+            <circle cx="20" cy="36" r="1.7" fill="#1F77E0"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="strands">
+        <!-- Strand 01 -->
+        <div class="strand strand--paper">
+          <svg aria-hidden="true" style="position:absolute;bottom:-12px;right:-12px;pointer-events:none;opacity:0.05;" width="110" height="110" viewBox="0 0 40 40" fill="none">
+            <path d="M20 4 L34 12 L20 20 L6 12 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+            <path d="M6 12 L6 28 L20 36 L20 20 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+            <path d="M34 12 L34 28 L20 36 L20 20 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+          </svg>
+          <div class="strand-header">
+            <div class="strand-num">01</div>
+            <div class="strand-tag">Strand</div>
+          </div>
+          <h3>AI Readiness &amp; Strategy</h3>
+          <p>We help you identify where AI will deliver real value and what foundations are needed to support it. By assessing your data, systems and ways of working, we define a tailored strategy aligned to your business priorities.</p>
+          <div class="strand-items">
+            <div class="strand-item"><span>AI readiness assessment</span><span class="arrow">→</span></div>
+            <div class="strand-item"><span>Strategy &amp; roadmap workshops</span><span class="arrow">→</span></div>
+            <div class="strand-item"><span>Shadow AI detection &amp; audit</span><span class="arrow">→</span></div>
+            <div class="strand-item"><span>Data governance and permissions</span><span class="arrow">→</span></div>
+            <div class="strand-item"><span>Use-case discovery &amp; prioritisation</span><span class="arrow">→</span></div>
+            <div class="strand-item"><span>ROI &amp; business-case modelling</span><span class="arrow">→</span></div>
+            <div class="strand-item"><span>Board &amp; executive briefings</span><span class="arrow">→</span></div>
+            <div class="strand-item"><span>AI Awareness training</span><span class="arrow">→</span></div>
+          </div>
+          <div class="strand-cta"><a href="contact.html?topic=strategy">Talk about strategy →</a></div>
+        </div>
+
+        <!-- Strand 02 -->
+        <div class="strand strand--navy">
+          <svg aria-hidden="true" style="position:absolute;bottom:-12px;right:-12px;pointer-events:none;opacity:0.05;" width="110" height="110" viewBox="0 0 40 40" fill="none">
+            <path d="M20 4 L34 12 L20 20 L6 12 Z" stroke="white" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+            <path d="M6 12 L6 28 L20 36 L20 20 Z" stroke="white" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+            <path d="M34 12 L34 28 L20 36 L20 20 Z" stroke="white" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+          </svg>
+          <div class="strand-header">
+            <div class="strand-num">02</div>
+            <div class="strand-tag">Strand</div>
+          </div>
+          <h3>Managed AI Implementation</h3>
+          <p>We design and deliver AI solutions that enhance decision-making and improve how your organisation operates, from streamlined workflows to custom models, with governance built-in from the outset.</p>
+          <div class="strand-items">
+            <div class="strand-item"><span>M365 Copilot deployment</span><span class="arrow">→</span></div>
+            <div class="strand-item"><span>SharePoint &amp; Teams AI integration</span><span class="arrow">→</span></div>
+            <div class="strand-item"><span>Custom AI workflows &amp; automation</span><span class="arrow">→</span></div>
+            <div class="strand-item"><span>Build AI agents</span><span class="arrow">→</span></div>
+            <div class="strand-item"><span>Proprietary AI models built on company intelligence</span><span class="arrow">→</span></div>
+            <div class="strand-item"><span>Proof of concept design &amp; implementation</span><span class="arrow">→</span></div>
+            <div class="strand-item"><span>Risk management &amp; governance</span><span class="arrow">→</span></div>
+            <div class="strand-item"><span>Post-deployment optimisation</span><span class="arrow">→</span></div>
+          </div>
+          <div class="strand-cta"><a href="contact.html?topic=implementation">Talk about implementation →</a></div>
+        </div>
+
+        <!-- Strand 03 -->
+        <div class="strand strand--paper">
+          <svg aria-hidden="true" style="position:absolute;bottom:-12px;right:-12px;pointer-events:none;opacity:0.05;" width="110" height="110" viewBox="0 0 40 40" fill="none">
+            <path d="M20 4 L34 12 L20 20 L6 12 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+            <path d="M6 12 L6 28 L20 36 L20 20 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+            <path d="M34 12 L34 28 L20 36 L20 20 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+          </svg>
+          <div class="strand-header">
+            <div class="strand-num">03</div>
+            <div class="strand-tag">Strand</div>
+          </div>
+          <h3>Fractional Leadership</h3>
+          <p>Flexible access to senior technology leadership, bringing strategic direction, accountability and oversight to your IT and AI initiatives.</p>
+          <div class="strand-items">
+            <div class="strand-item"><span>Fractional IT Director / Head of AI</span><span class="arrow">→</span></div>
+            <div class="strand-item"><span>Technology budget reviews</span><span class="arrow">→</span></div>
+            <div class="strand-item"><span>Vendor &amp; project management</span><span class="arrow">→</span></div>
+            <div class="strand-item"><span>Board &amp; stakeholder reporting</span><span class="arrow">→</span></div>
+            <div class="strand-item"><span>Cloud &amp; infrastructure roadmap</span><span class="arrow">→</span></div>
+            <div class="strand-item"><span>AI governance oversight</span><span class="arrow">→</span></div>
+            <div class="strand-item"><span>IT Team mentoring &amp; uplift</span><span class="arrow">→</span></div>
+            <div class="strand-item"><span>Cyber security advisory (vCISO)</span><span class="arrow">→</span></div>
+          </div>
+          <div class="strand-cta"><a href="contact.html?topic=leadership">Talk about leadership →</a></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section id="clients" aria-labelledby="clients-heading">
+      <div class="section-header section-header--loud">
+        <div>
+          <div class="eyebrow">What clients say</div>
+          <h2 id="clients-heading">In their own words.</h2>
+        </div>
+        <div class="section-marker">
+          <span>§03</span>
+          <span class="slash">/</span>
+          <span class="label">Clients</span>
+          <span>→</span>
+          <svg width="18" height="18" viewBox="0 0 40 40" fill="none" aria-hidden="true" style="opacity:0.4;flex-shrink:0;">
+            <path d="M20 4 L34 12 L20 20 L6 12 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+            <path d="M6 12 L6 28 L20 36 L20 20 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+            <path d="M34 12 L34 28 L20 36 L20 20 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+            <circle cx="20" cy="4"  r="1.7" fill="#1F77E0"/>
+            <circle cx="20" cy="20" r="1.7" fill="#1F77E0"/>
+            <circle cx="20" cy="36" r="1.7" fill="#1F77E0"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="testimonials">
+        <div class="testimonial testimonial--dark">
+          <div class="testimonial-ornament" aria-hidden="true">"</div>
+          <div class="testimonial-body">
+            <blockquote>
+              The technology transitions have always been <em>handled seamlessly</em> — a real credit to your skills and foresight.
+            </blockquote>
+            <div class="testimonial-footer">
+              <div class="testimonial-attr">
+                <div class="name">Project Director</div>
+                <div class="role">Healthcare &amp; Commercial</div>
+              </div>
+              <div class="testimonial-id">Client · 01</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial testimonial--dark">
+          <div class="testimonial-ornament" aria-hidden="true">"</div>
+          <div class="testimonial-body">
+            <blockquote>
+              Your <em>calm, thoughtful guidance</em> has always ensured we are at the forefront of tech.
+            </blockquote>
+            <div class="testimonial-footer">
+              <div class="testimonial-attr">
+                <div class="name">Director</div>
+                <div class="role">Interior Architecture</div>
+              </div>
+              <div class="testimonial-id">Client · 02</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" aria-labelledby="about-heading">
+      <div class="section-header section-header--quiet">
+        <div>
+          <div class="eyebrow">About</div>
+          <h2 id="about-heading">25 years in IT leadership. <em style="font-style:normal">Now focused on AI.</em></h2>
+        </div>
+        <div class="section-marker">
+          <span>§04</span>
+          <span class="slash">/</span>
+          <span class="label">Director</span>
+          <span>→</span>
+          <svg width="18" height="18" viewBox="0 0 40 40" fill="none" aria-hidden="true" style="opacity:0.4;flex-shrink:0;">
+            <path d="M20 4 L34 12 L20 20 L6 12 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+            <path d="M6 12 L6 28 L20 36 L20 20 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+            <path d="M34 12 L34 28 L20 36 L20 20 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+            <circle cx="20" cy="4"  r="1.7" fill="#1F77E0"/>
+            <circle cx="20" cy="20" r="1.7" fill="#1F77E0"/>
+            <circle cx="20" cy="36" r="1.7" fill="#1F77E0"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-text">
+          <p><strong>Masters AI</strong> is headed by Ben Masters Williams, a technology executive with more than 25 years of experience managing technology and security functions across professional services and enterprise environments in Europe, the UK, and Australia.</p>
+          <p class="muted">After early roles on the helpdesk at Coca-Cola in Brussels and AMP in London, Ben moved into cybersecurity at McAfee, working as a trusted advisor to large enterprise clients including Barclays Bank and BAA Plc. He later relocated to Melbourne and spent 14 years at leading architecture firm Bates Smart, where he served as Head of IT and Associate Director.</p>
+          <p class="muted">During his tenure, he led a series of transformation initiatives, implemented a hybrid-cloud strategy, reduced IT costs for three consecutive years, managed the firm's technology response to the pandemic and built a technology function that consistently earned the trust of the business.</p>
+          <p class="muted">Masters AI has a clear understanding that new technology only matters if it is deployed responsibly and adopted by real people doing real work. We help organisations turn AI into practical outcomes that improve how they operate. Our focus is on real value, with a clear, vendor-neutral approach and governance built-in from the start.</p>
+          <div class="certs">
+            <span class="cert-chip">AI Transformation Leader</span>
+            <span class="cert-chip">Azure Solutions Architect Expert</span>
+            <div style="width:100%"></div>
+            <span class="cert-chip">CISSP</span>
+            <span class="cert-chip">CISM</span>
+            <span class="cert-chip">MACS Snr CP (Cyber)</span>
+            <div style="width:100%"></div>
+            <span class="cert-chip">ITILv4</span>
+            <span class="cert-chip">PRINCE2</span>
+          </div>
+        </div>
+        <div class="about-profile">
+          <div class="portrait">
+            <img src="assets/BW Headshot.png" alt="Ben Williams">
+          </div>
+          <div>
+            <div class="profile-name">Ben Williams</div>
+            <div class="profile-title">Director · Masters AI</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- In one line + Stats -->
+      <div class="stats-row">
+        <div class="in-one-line">
+          <svg class="cube-mark" width="48" height="48" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+            <path d="M20 4 L34 12 L20 20 L6 12 Z" stroke="white" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+            <path d="M6 12 L6 28 L20 36 L20 20 Z" stroke="white" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+            <path d="M34 12 L34 28 L20 36 L20 20 Z" stroke="white" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+            <circle cx="20" cy="4"  r="1.7" fill="#7FB6FF"/>
+            <circle cx="34" cy="12" r="1.7" fill="#7FB6FF"/>
+            <circle cx="6"  cy="12" r="1.7" fill="#7FB6FF"/>
+            <circle cx="20" cy="20" r="1.7" fill="#7FB6FF"/>
+            <circle cx="34" cy="28" r="1.7" fill="#7FB6FF"/>
+            <circle cx="6"  cy="28" r="1.7" fill="#7FB6FF"/>
+            <circle cx="20" cy="36" r="1.7" fill="#7FB6FF"/>
+          </svg>
+          <div class="eyebrow">In one line</div>
+          <blockquote>AI advice from someone who's <em>actually run IT.</em></blockquote>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">25+</div>
+          <div class="stat-label">Years in enterprise IT &amp; security leadership</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">7</div>
+          <div class="stat-label">Industry-recognised certifications held by the director</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">1:1</div>
+          <div class="stat-label">Direct engagement from end-to-end</div>
+        </div>
+      </div>
+
+      <!-- Independent Advice -->
+      <div class="advice">
+        <!-- Cube watermark -->
+        <svg class="cube-mark" width="200" height="200" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+          <path d="M20 4 L34 12 L20 20 L6 12 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+          <path d="M6 12 L6 28 L20 36 L20 20 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+          <path d="M34 12 L34 28 L20 36 L20 20 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+        </svg>
+        <div>
+          <div class="eyebrow">Independent Advice</div>
+          <h3>Independent advice with <em style="font-style:normal">no vendor bias.</em></h3>
+        </div>
+        <p>Being independent allows us to give honest, objective recommendations based on what fits your context — your data, your existing systems and your team's readiness for change.</p>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="contact" aria-labelledby="cta-heading">
+      <div class="cta">
+        <!-- Cube watermark -->
+        <svg class="cube-mark" width="180" height="180" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+          <path d="M20 4 L34 12 L20 20 L6 12 Z" stroke="#FAF6EC" stroke-width="1" stroke-linejoin="round" fill="none"/>
+          <path d="M6 12 L6 28 L20 36 L20 20 Z" stroke="#FAF6EC" stroke-width="1" stroke-linejoin="round" fill="none"/>
+          <path d="M34 12 L34 28 L20 36 L20 20 Z" stroke="#FAF6EC" stroke-width="1" stroke-linejoin="round" fill="none"/>
+        </svg>
+        <div class="section-marker">
+          <span>§05</span>
+          <span class="slash">/</span>
+          <span class="label">Contact</span>
+          <svg width="18" height="18" viewBox="0 0 40 40" fill="none" aria-hidden="true" style="opacity:0.4;flex-shrink:0;">
+            <path d="M20 4 L34 12 L20 20 L6 12 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+            <path d="M6 12 L6 28 L20 36 L20 20 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+            <path d="M34 12 L34 28 L20 36 L20 20 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+          </svg>
+        </div>
+        <h2 id="cta-heading">Ready to <em style="font-style:normal">get started?</em></h2>
+        <p>Get in touch to discuss how we can help.</p>
+        <a href="contact.html" class="pill pill--cta">Get in touch ↗</a>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <span>© 2026 Masters AI Pty Ltd</span>
+      <span>Melbourne, Australia</span>
+    </footer>
+
+  </div>
+</body>
+</html>
