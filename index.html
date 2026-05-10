@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Masters AI — AI Strategy, Implementation &amp; Governance</title>
+  <title>Masters AI Advisory — AI Strategy, Implementation &amp; Governance</title>
   <meta name="description" content="Masters AI helps Australian organisations get real value from AI — from assessing readiness to automating workflows to enterprise transformation.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300..900;1,8..60,300..900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     /* ── Design Tokens ─────────────────────────────────────────────── */
     :root {
-      --bg:           #F5EFE3;
-      --bg2:          #FAF6EC;
+      --bg:           #E8EBF0;
+      --bg2:          #EEF2F8;
       --panel:        #FFFFFF;
       --panel-dark:   #0E1E3A;
       --panel-dark2:  #142B52;
@@ -20,10 +20,11 @@
       --muted:        #6B6256;
       --accent:       #1F77E0;
       --accent-light: #7FB6FF;
+      --rust:         #B84A20;
       --rule:         #E0D6C4;
       --rule-dark:    rgba(245,239,227,0.12);
 
-      --display: 'Source Serif 4', 'Source Serif Pro', Georgia, serif;
+      --display: 'Raleway', sans-serif;
       --body:    Inter, system-ui, sans-serif;
       --mono:    'JetBrains Mono', ui-monospace, monospace;
     }
@@ -50,18 +51,29 @@
     /* ── Utility classes ────────────────────────────────────────────── */
     .eyebrow {
       font-family: var(--mono);
-      font-size: 10px;
+      font-size: 11px;
       letter-spacing: 0.12em;
       color: var(--accent);
       text-transform: uppercase;
       font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--rust);
+      display: inline-block;
+      flex-shrink: 0;
     }
 
     .section-marker {
       font-family: var(--mono);
       font-size: 11px;
       letter-spacing: 0.08em;
-      color: var(--accent);
+      color: var(--rust);
       text-transform: uppercase;
       display: flex;
       align-items: center;
@@ -86,6 +98,7 @@
     .pill--solid  { background: var(--fg); color: var(--bg2); border: 1px solid var(--fg); }
     .pill--outline { background: transparent; color: var(--fg); border: 1px solid var(--rule); }
     .pill--nav    { background: var(--bg2); color: var(--panel-dark); border: none; }
+    .pill--nav:hover { opacity: 0.85; }
 
     .cert-chip {
       font-family: var(--mono);
@@ -105,33 +118,30 @@
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
-      margin-top: 56px;
-      margin-bottom: 20px;
+      margin-top: 16px;
+      margin-bottom: 16px;
       padding: 0 8px;
     }
     .section-header h2 {
       font-family: var(--display);
-      font-size: 44px;
-      font-weight: 400;
-      margin: 12px 0 0;
-      letter-spacing: -0.02em;
+      font-size: 40px;
+      font-weight: 300;
+      margin: 8px 0 0;
+      letter-spacing: -0.01em;
       line-height: 1.1;
     }
     .section-header h2 em {
       color: var(--accent);
-      font-style: italic;
+      font-style: normal;
+      font-weight: 500;
     }
-    /* Pacing modifiers */
-    .section-header--quiet h2  { font-size: 34px; }
-    .section-header--medium h2 { font-size: 44px; }
-    .section-header--loud h2   { font-size: 52px; }
 
     /* ── Navigation ─────────────────────────────────────────────────── */
     .nav {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px 32px;
+      padding: 28px 40px;
       background: var(--panel-dark);
       border-radius: 6px;
     }
@@ -145,8 +155,8 @@
     }
     .nav-links a { color: var(--bg2); transition: opacity 0.15s; }
     .nav-links a:hover { opacity: 0.7; }
-    .nav-links .pill--nav { color: var(--panel-dark); }
-    .nav-links .pill--nav:hover { opacity: 0.85; }
+    .pill--nav { background: #FAF6EC; color: var(--panel-dark) !important; }
+    .pill--nav:hover { opacity: 0.85; }
 
     /* ── Hero ────────────────────────────────────────────────────────── */
     .hero {
@@ -156,10 +166,11 @@
       margin-top: 16px;
     }
     .hero-main {
-      background: var(--panel);
+      background: var(--panel-dark);
       padding: 48px;
       border-radius: 4px;
-      border: 1px solid var(--rule);
+      border: none;
+      color: var(--bg);
       position: relative;
       overflow: hidden;
     }
@@ -171,34 +182,37 @@
       pointer-events: none;
     }
     .hero-main h1 {
-      font-family: var(--display);
-      font-size: 64px;
+      font-family: 'Raleway', sans-serif;
+      font-size: 52px;
       line-height: 1.05;
-      font-weight: 400;
+      font-weight: 300;
       margin: 20px 0 18px;
-      letter-spacing: -0.02em;
+      letter-spacing: -0.01em;
       text-wrap: balance;
     }
-    .hero-main h1 em { color: var(--accent); font-style: italic; }
+    .hero-main h1 em { color: var(--accent-light); font-style: normal; font-weight: 500; }
     .hero-main p {
       font-size: 15px;
       line-height: 1.55;
-      color: var(--muted);
+      color: rgba(245,239,227,0.70);
       max-width: 520px;
     }
+    .hero-main .pill--solid { background: var(--bg2); color: var(--panel-dark); border-color: transparent; }
+    .hero-main .pill--outline { background: transparent; color: rgba(255,255,255,0.85); border-color: rgba(255,255,255,0.3); }
     .hero-ctas {
       display: flex;
       gap: 10px;
       margin-top: 28px;
     }
     .hero-quote {
-      background: var(--panel-dark);
+      background: var(--panel);
       padding: 36px;
       border-radius: 4px;
-      color: var(--bg);
+      border: 1px solid var(--rule);
+      color: var(--fg);
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: flex-end;
       min-height: 380px;
       position: relative;
       overflow: hidden;
@@ -207,24 +221,25 @@
     }
     .hero-quote:hover {
       transform: translateY(-3px);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.22);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.10);
     }
     .hero-quote .cube-mark {
       position: absolute;
       top: 16px;
-      right: 16px;
-      opacity: 0.18;
+      right: 24px;
+      opacity: 0.08;
     }
-    .hero-quote .eyebrow { color: #E8D9B8; }
+    .hero-quote .eyebrow { color: var(--muted); }
     .hero-quote blockquote {
       font-family: var(--display);
-      font-size: 27px;
+      font-size: 28px;
       line-height: 1.35;
-      font-style: italic;
-      font-weight: 400;
-      margin-bottom: 48px;
+      font-style: normal;
+      font-weight: 300;
+      margin-top: 0;
+      margin-bottom: 0;
     }
-    .hero-quote blockquote em { color: var(--accent-light); font-style: italic; }
+    .hero-quote blockquote em { color: var(--accent); font-style: normal; font-weight: 500; }
 
     /* ── Service strands ─────────────────────────────────────────────── */
     .strands {
@@ -269,7 +284,8 @@
     .strand-num {
       font-family: var(--display);
       font-size: 38px;
-      font-style: italic;
+      font-style: normal;
+      font-weight: 200;
       color: var(--accent);
       line-height: 1;
     }
@@ -285,11 +301,12 @@
     .strand h3 {
       font-family: var(--display);
       font-size: 22px;
-      font-weight: 500;
+      font-weight: 400;
       line-height: 1.2;
+      letter-spacing: -0.005em;
     }
     .strand p {
-      font-size: 12.5px;
+      font-size: 15px;
       line-height: 1.55;
       margin: 0;
     }
@@ -325,7 +342,7 @@
     }
     .testimonial {
       background: var(--bg2);
-      padding: 56px;
+      padding: 36px;
       border-radius: 4px;
       border: 1px solid var(--rule);
       position: relative;
@@ -344,10 +361,11 @@
       top: 12px;
       left: 24px;
       font-family: var(--display);
-      font-style: italic;
-      font-size: 180px;
-      color: var(--accent);
-      opacity: 0.22;
+      font-weight: 200;
+      font-style: normal;
+      font-size: 120px;
+      color: var(--fg);
+      opacity: 0.10;
       line-height: 1;
       pointer-events: none;
       user-select: none;
@@ -361,12 +379,14 @@
     }
     .testimonial blockquote {
       font-family: var(--display);
-      font-size: 36px;
+      font-size: 28px;
       line-height: 1.3;
-      font-weight: 400;
-      letter-spacing: -0.02em;
+      font-weight: 300;
+      font-style: italic;
+      letter-spacing: -0.01em;
+      margin-bottom: 20px;
     }
-    .testimonial blockquote em { color: var(--accent); font-style: italic; }
+    .testimonial blockquote em { color: var(--accent); font-style: normal; font-weight: 500; }
     .testimonial-footer {
       margin-top: auto;
       padding-top: 20px;
@@ -389,7 +409,7 @@
       border-color: var(--panel-dark);
       color: var(--bg);
     }
-    .testimonial--dark .testimonial-ornament { color: var(--accent-light); }
+    .testimonial--dark .testimonial-ornament { color: var(--bg); opacity: 0.18; }
     .testimonial--dark blockquote em { color: var(--accent-light); }
     .testimonial--dark .testimonial-footer { border-top-color: rgba(255,255,255,0.12); }
     .testimonial--dark .testimonial-attr .name { color: var(--bg); }
@@ -418,13 +438,13 @@
     }
     .advice h3 {
       font-family: var(--display);
-      font-size: 32px;
-      font-weight: 400;
+      font-size: 28px;
+      font-weight: 300;
       margin: 12px 0 0;
       line-height: 1.15;
-      letter-spacing: -0.02em;
+      letter-spacing: -0.01em;
     }
-    .advice h3 em { color: var(--accent); font-style: normal; }
+    .advice h3 em { color: var(--accent); font-style: normal; font-weight: 500; }
     .advice p {
       font-size: 15px;
       line-height: 1.6;
@@ -450,21 +470,31 @@
       transform: translateY(-3px);
       box-shadow: 0 8px 32px rgba(0,0,0,0.10);
     }
-    .about-text p { font-size: 13px; line-height: 1.6; margin-bottom: 12px; }
-    .about-text p:last-of-type { margin-bottom: 24px; }
+    .about-text p { font-size: 15px; line-height: 1.6; margin-bottom: 12px; }
+    .about-text p:last-of-type { margin-bottom: 0; }
     .about-text p.muted { color: var(--muted); }
     .about-text strong { font-weight: 600; }
     .certs { display: flex; flex-wrap: wrap; gap: 6px; }
     .about-profile {
       background: var(--panel);
-      padding: 24px;
+      padding: 0;
       border-radius: 4px;
       border: 1px solid var(--rule);
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      overflow: hidden;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
       cursor: default;
+    }
+    .about-profile-content {
+      padding: 20px 24px 24px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .about-profile-content .certs {
+      margin-top: auto;
+      padding-top: 20px;
     }
     .about-profile:hover {
       transform: translateY(-3px);
@@ -472,10 +502,9 @@
     }
     .portrait img {
       width: 100%;
-      aspect-ratio: 1 / 1;
+      aspect-ratio: 4 / 3;
       object-fit: cover;
       object-position: center top;
-      border: 1px solid var(--rule);
       display: block;
     }
     .profile-name {
@@ -495,34 +524,41 @@
     /* ── In one line + Stats ─────────────────────────────────────────── */
     .stats-row {
       display: grid;
-      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      grid-template-columns: 1.4fr 1fr;
       gap: 16px;
       margin-top: 16px;
+      margin-bottom: 16px;
+    }
+    .stat-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
     }
     .in-one-line {
       background: var(--panel-dark);
       color: var(--bg);
-      padding: 32px;
+      padding: 36px;
       border-radius: 4px;
       position: relative;
       overflow: hidden;
+      display: flex;
+      align-items: center;
     }
     .in-one-line .cube-mark {
       position: absolute;
       top: 12px;
       right: 12px;
-      opacity: 0.2;
+      opacity: 0.08;
     }
     .in-one-line .eyebrow { color: #E8D9B8; }
     .in-one-line blockquote {
       font-family: var(--display);
-      font-size: 36px;
+      font-size: 32px;
       line-height: 1.2;
-      margin-top: 14px;
-      font-weight: 400;
+      font-weight: 300;
       font-style: normal;
     }
-    .in-one-line blockquote em { color: var(--accent-light); font-style: italic; }
+    .in-one-line blockquote em { color: var(--accent-light); font-style: normal; font-weight: 500; }
 
     .stat-card {
       background: var(--panel);
@@ -534,12 +570,12 @@
       font-family: var(--display);
       font-size: 96px;
       line-height: 1;
-      font-weight: 400;
+      font-weight: 200;
       color: var(--fg);
       letter-spacing: -0.03em;
     }
     .stat-label {
-      font-size: 12px;
+      font-size: 13px;
       color: var(--muted);
       line-height: 1.4;
       max-width: 180px;
@@ -548,9 +584,9 @@
 
     /* ── CTA ─────────────────────────────────────────────────────────── */
     .cta {
-      margin-top: 56px;
+      margin-top: 16px;
       background: var(--panel-dark);
-      padding: 72px;
+      padding: 48px 56px;
       border-radius: 4px;
       border: none;
       position: relative;
@@ -561,21 +597,24 @@
       position: absolute;
       right: 40px;
       top: 20px;
-      opacity: 0.1;
+      opacity: 0.08;
     }
-    .cta .section-marker { color: #E8D9B8; }
-    .cta .section-marker .label { color: rgba(245,239,227,0.5); }
+    .cta .section-marker,
+    .hero-quote .section-marker { color: #E8D9B8; }
+    .cta .section-marker .label,
+    .hero-quote .section-marker .label { color: rgba(245,239,227,0.5); }
+    .hero-quote .section-marker .dot { background: var(--accent-light); }
     .cta h2 {
       font-family: var(--display);
-      font-size: 72px;
-      font-weight: 400;
+      font-size: 44px;
+      font-weight: 300;
       margin: 16px 0 18px;
-      letter-spacing: -0.03em;
+      letter-spacing: -0.01em;
       line-height: 1;
     }
-    .cta h2 em { color: var(--accent-light); font-style: italic; }
+    .cta h2 em { color: var(--accent-light); font-style: normal; font-weight: 500; }
     .cta p {
-      font-size: 16px;
+      font-size: 15px;
       color: rgba(245,239,227,0.7);
       max-width: 520px;
       margin-bottom: 32px;
@@ -586,7 +625,20 @@
       border: none;
     }
 
-    /* ── Bottom padding ──────────────────────────────────────────────── */
+    /* ── Rust structural accents ────────────────────────────────────── */
+    /* Top-left bar — hero-main and advice (concept B front) */
+    .hero-quote::before,
+    .advice::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 52px; height: 3px;
+      background: var(--rust);
+    }
+    /* Left border — strand 01 */
+    .strand--accent-rust { border-left: 2px solid var(--rust); }
+
+    /* ── Footer ──────────────────────────────────────────────────────── */
     .site-footer {
       margin-top: 32px;
       padding: 24px 8px;
@@ -604,47 +656,36 @@
     @media (max-width: 768px) {
       .site-wrapper { padding: 12px; }
 
-      /* Nav */
       .nav { padding: 14px 16px; flex-wrap: wrap; gap: 10px; }
       .nav-links { gap: 16px; font-size: 12px; }
       .nav-tagline, .nav-divider { display: none; }
+      .nav-wordmark span { font-size: 18px !important; letter-spacing: .08em !important; }
 
-      /* Hero */
       .hero { grid-template-columns: 1fr; }
       .hero-main { padding: 28px 24px; }
-      .hero-main h1 { font-size: 38px; }
+      .hero-main h1 { font-size: 34px; }
       .hero-quote { min-height: auto; }
 
-      /* Section headers */
       .section-header { flex-direction: column; align-items: flex-start; gap: 10px; margin-top: 40px; }
-      .section-header h2 { font-size: 30px; }
-      .section-header--quiet h2  { font-size: 26px; }
-      .section-header--medium h2 { font-size: 30px; }
-      .section-header--loud h2   { font-size: 34px; }
+      .section-header h2 { font-size: 28px; }
 
-      /* Services */
       .strands { grid-template-columns: 1fr; }
 
-      /* Testimonials */
       .testimonials { grid-template-columns: 1fr; }
       .testimonial { padding: 32px 24px; }
       .testimonial blockquote { font-size: 24px; }
 
-      /* About */
       .about-grid { grid-template-columns: 1fr; }
       .advice { grid-template-columns: 1fr; padding: 28px 24px; }
 
-      /* Stats row */
-      .stats-row { grid-template-columns: 1fr 1fr; }
-      .in-one-line { grid-column: 1 / -1; }
+      .stats-row { grid-template-columns: 1fr; }
+      .stat-cards { grid-template-columns: 1fr 1fr; }
       .in-one-line blockquote { font-size: 26px; }
       .stat-num { font-size: 56px; }
 
-      /* CTA */
       .cta { padding: 40px 24px; margin-top: 32px; }
       .cta h2 { font-size: 40px; }
 
-      /* Footer */
       .site-footer { flex-direction: column; gap: 6px; text-align: center; }
     }
   </style>
@@ -655,11 +696,26 @@
     <!-- NAVIGATION -->
     <nav class="nav">
       <div style="display:flex;align-items:center;gap:20px;flex-shrink:0;">
-        <a href="/">
-          <img src="assets/mai-nav-logo.svg" alt="Masters AI" style="height: 64px; width: auto; max-width: none; flex-shrink:0;">
+        <a href="index.html" style="display:flex;align-items:center;gap:14px;text-decoration:none;flex-shrink:0;" aria-label="Masters AI">
+          <svg width="54" height="54" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+            <path d="M20 4 L34 12 L20 20 L6 12 Z" fill="#ffffff" fill-opacity=".06"/>
+            <path d="M6 12 L6 28 L20 36 L20 20 Z"  fill="#ffffff" fill-opacity=".03"/>
+            <path d="M34 12 L34 28 L20 36 L20 20 Z" fill="#ffffff" fill-opacity=".05"/>
+            <path d="M20 4 L34 12 L20 20 L6 12 Z" stroke="#ffffff" stroke-opacity=".85" stroke-width="1.1" stroke-linejoin="round"/>
+            <path d="M6 12 L6 28 L20 36 L20 20 Z"  stroke="#ffffff" stroke-opacity=".85" stroke-width="1.1" stroke-linejoin="round"/>
+            <path d="M34 12 L34 28 L20 36 L20 20 Z" stroke="#ffffff" stroke-opacity=".85" stroke-width="1.1" stroke-linejoin="round"/>
+            <circle cx="20" cy="4"  r="1.7" fill="#7FB6FF"/>
+            <circle cx="34" cy="12" r="1.7" fill="#7FB6FF"/>
+            <circle cx="6"  cy="12" r="1.7" fill="#7FB6FF"/>
+            <circle cx="20" cy="20" r="1.7" fill="#7FB6FF"/>
+            <circle cx="34" cy="28" r="1.7" fill="#7FB6FF"/>
+            <circle cx="6"  cy="28" r="1.7" fill="#B84A20"/>
+            <circle cx="20" cy="36" r="1.7" fill="#7FB6FF"/>
+          </svg>
+          <div class="nav-wordmark" style="display:flex;align-items:baseline;line-height:1;">
+            <span style="font-family:'Raleway',sans-serif;font-size:28px;font-weight:200;letter-spacing:.13em;text-transform:uppercase;color:#ffffff">Masters&thinsp;</span><span style="font-family:'Raleway',sans-serif;font-size:28px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:#ffffff">AI</span><span style="font-family:'Raleway',sans-serif;font-size:28px;font-weight:200;letter-spacing:.13em;text-transform:uppercase;color:#ffffff">&thinsp;Advisory</span>
+          </div>
         </a>
-        <span class="nav-divider" style="width:1px;height:28px;background:rgba(245,239,227,0.15);display:block;flex-shrink:0;"></span>
-        <span class="nav-tagline" style="font-family:var(--mono);font-size:11px;letter-spacing:0.1em;color:rgba(245,239,227,0.55);text-transform:uppercase;">AI Strategy · AI Implementation · AI Governance</span>
       </div>
       <ul class="nav-links">
         <li><a href="#services">Services</a></li>
@@ -673,56 +729,46 @@
     <!-- HERO -->
     <section class="hero" aria-label="Introduction">
       <div class="hero-main">
-        <svg class="hero-main-cube" width="160" height="160" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-          <path d="M20 4 L34 12 L20 20 L6 12 Z" stroke="#1F77E0" stroke-width="1" stroke-linejoin="round" fill="none"/>
-          <path d="M6 12 L6 28 L20 36 L20 20 Z" stroke="#1F77E0" stroke-width="1" stroke-linejoin="round" fill="none"/>
-          <path d="M34 12 L34 28 L20 36 L20 20 Z" stroke="#1F77E0" stroke-width="1" stroke-linejoin="round" fill="none"/>
+        <svg class="hero-main-cube" width="100" height="100" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+          <path d="M20 4 L34 12 L20 20 L6 12 Z" stroke="#7FB6FF" stroke-width="1" stroke-linejoin="round" fill="none"/>
+          <path d="M6 12 L6 28 L20 36 L20 20 Z" stroke="#7FB6FF" stroke-width="1" stroke-linejoin="round" fill="none"/>
+          <path d="M34 12 L34 28 L20 36 L20 20 Z" stroke="#7FB6FF" stroke-width="1" stroke-linejoin="round" fill="none"/>
         </svg>
-        <div class="eyebrow">AI Strategy · AI Implementation · AI Governance</div>
-        <h1>Helping Australian organisations get <em>real value</em> from AI.</h1>
-        <p>Masters AI helps businesses cut through the noise and get real value from artificial intelligence. From assessing readiness and optimising workflows to custom model deployments, our services cover the full implementation lifecycle with a focus on responsible adoption and practical governance.</p>
+        <div class="eyebrow" style="color:rgba(245,239,227,0.55);"><span class="dot"></span>AI Strategy · AI Implementation · AI Governance</div>
+        <h1>Helping your business get <em style="font-weight:500;">real value</em> from AI.</h1>
+        <p>Masters AI helps you to cut through the noise and get real value from artificial intelligence, with a focus on responsible adoption and practical governance.</p>
         <div class="hero-ctas">
           <a href="#services" class="pill pill--solid">What we do →</a>
           <a href="contact.html" class="pill pill--outline">Get in touch</a>
         </div>
       </div>
       <div class="hero-quote" aria-label="Why Masters AI">
-        <!-- Cube mark -->
-        <svg class="cube-mark" width="120" height="120" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-          <path d="M20 4 L34 12 L20 20 L6 12 Z" stroke="white" stroke-width="1" stroke-linejoin="round" fill="none"/>
-          <path d="M6 12 L6 28 L20 36 L20 20 Z" stroke="white" stroke-width="1" stroke-linejoin="round" fill="none"/>
-          <path d="M34 12 L34 28 L20 36 L20 20 Z" stroke="white" stroke-width="1" stroke-linejoin="round" fill="none"/>
+        <svg class="cube-mark" width="150" height="150" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+          <path d="M20 4 L34 12 L20 20 L6 12 Z" stroke="#1F77E0" stroke-width="1" stroke-linejoin="round" fill="none"/>
+          <path d="M6 12 L6 28 L20 36 L20 20 Z" stroke="#1F77E0" stroke-width="1" stroke-linejoin="round" fill="none"/>
+          <path d="M34 12 L34 28 L20 36 L20 20 Z" stroke="#1F77E0" stroke-width="1" stroke-linejoin="round" fill="none"/>
         </svg>
-        <div class="eyebrow">§01 / Why Masters AI</div>
         <blockquote>
-          "Most AI advice comes from people who've never owned the operational risk. Ours comes <em>from those who have.</em>"
+          "Lasting AI value comes from asking the right questions and <em style="font-style:normal">building trust along the way.</em>"
         </blockquote>
       </div>
     </section>
 
     <!-- SERVICES -->
     <section id="services" aria-labelledby="services-heading">
-      <div class="section-header section-header--medium">
+      <div class="section-header">
         <div>
-          <div class="eyebrow">How we help</div>
-          <h2 id="services-heading">Three ways to work <em style="font-style:normal">together.</em></h2>
+          <h2 id="services-heading">What we offer.</h2>
         </div>
         <div class="section-marker">
-          <span>§02</span>
-          <span class="slash">/</span>
+          <span class="dot"></span>
           <span class="label">Services</span>
-          <span>→</span>
-          <svg width="18" height="18" viewBox="0 0 40 40" fill="none" aria-hidden="true" style="opacity:0.4;flex-shrink:0;">
-            <path d="M20 4 L34 12 L20 20 L6 12 Z" stroke="#B84A20" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
-            <path d="M6 12 L6 28 L20 36 L20 20 Z" stroke="#B84A20" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
-            <path d="M34 12 L34 28 L20 36 L20 20 Z" stroke="#B84A20" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
-          </svg>
         </div>
       </div>
 
       <div class="strands">
         <!-- Strand 01 -->
-        <div class="strand strand--paper">
+        <div class="strand strand--paper strand--accent-rust">
           <svg aria-hidden="true" style="position:absolute;bottom:-12px;right:-12px;pointer-events:none;opacity:0.05;" width="110" height="110" viewBox="0 0 40 40" fill="none">
             <path d="M20 4 L34 12 L20 20 L6 12 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
             <path d="M6 12 L6 28 L20 36 L20 20 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
@@ -730,7 +776,6 @@
           </svg>
           <div class="strand-header">
             <div class="strand-num" style="color: #B84A20;">01</div>
-            <div class="strand-tag">Strand</div>
           </div>
           <h3>AI Readiness &amp; Strategy</h3>
           <p>We help you identify where AI will deliver real value and what foundations are needed to support it. By assessing your data, systems and ways of working, we define a tailored strategy aligned to your business priorities.</p>
@@ -756,7 +801,6 @@
           </svg>
           <div class="strand-header">
             <div class="strand-num">02</div>
-            <div class="strand-tag">Strand</div>
           </div>
           <h3>Managed AI Implementation</h3>
           <p>We design and deliver AI solutions that enhance decision-making and improve how your organisation operates, from streamlined workflows to custom models, with governance built-in from the outset.</p>
@@ -782,7 +826,6 @@
           </svg>
           <div class="strand-header">
             <div class="strand-num">03</div>
-            <div class="strand-tag">Strand</div>
           </div>
           <h3>Fractional Leadership</h3>
           <p>Flexible access to senior technology leadership, bringing strategic direction, accountability and oversight to your IT and AI initiatives.</p>
@@ -803,21 +846,13 @@
 
     <!-- TESTIMONIALS -->
     <section id="clients" aria-labelledby="clients-heading">
-      <div class="section-header section-header--loud">
+      <div class="section-header">
         <div>
-          <div class="eyebrow">What clients say</div>
-          <h2 id="clients-heading">In their own words.</h2>
+          <h2 id="clients-heading">What clients say.</h2>
         </div>
         <div class="section-marker">
-          <span>§03</span>
-          <span class="slash">/</span>
+          <span class="dot"></span>
           <span class="label">Clients</span>
-          <span>→</span>
-          <svg width="18" height="18" viewBox="0 0 40 40" fill="none" aria-hidden="true" style="opacity:0.4;flex-shrink:0;">
-            <path d="M20 4 L34 12 L20 20 L6 12 Z" stroke="#B84A20" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
-            <path d="M6 12 L6 28 L20 36 L20 20 Z" stroke="#B84A20" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
-            <path d="M34 12 L34 28 L20 36 L20 20 Z" stroke="#B84A20" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
-          </svg>
         </div>
       </div>
 
@@ -826,30 +861,30 @@
           <div class="testimonial-ornament" aria-hidden="true">"</div>
           <div class="testimonial-body">
             <blockquote>
-              The technology transitions have always been <em>handled seamlessly</em> — a real credit to your skills and foresight.
+              The technology transitions have always been <em style="font-style:italic">handled seamlessly</em> — a real credit to your skills and foresight.
             </blockquote>
-            <div class="testimonial-footer">
-              <div class="testimonial-attr">
-                <div class="name">Project Director</div>
-                <div class="role">Healthcare &amp; Commercial</div>
-              </div>
-              <div class="testimonial-id">Client · 01</div>
+          </div>
+          <div class="testimonial-footer">
+            <div class="testimonial-attr">
+              <div class="name">Project Director</div>
+              <div class="role">Healthcare &amp; Commercial</div>
             </div>
+            <div class="testimonial-id">Client · 01</div>
           </div>
         </div>
         <div class="testimonial testimonial--dark">
           <div class="testimonial-ornament" aria-hidden="true">"</div>
           <div class="testimonial-body">
             <blockquote>
-              Your <em>calm, thoughtful guidance</em> has always ensured we are at the forefront of tech.
+              Your <em style="font-style:italic">calm, thoughtful guidance</em> has always ensured we are at the forefront of tech.
             </blockquote>
-            <div class="testimonial-footer">
-              <div class="testimonial-attr">
-                <div class="name">Director</div>
-                <div class="role">Interior Architecture</div>
-              </div>
-              <div class="testimonial-id">Client · 02</div>
+          </div>
+          <div class="testimonial-footer">
+            <div class="testimonial-attr">
+              <div class="name">Director</div>
+              <div class="role">Interior Architecture</div>
             </div>
+            <div class="testimonial-id">Client · 02</div>
           </div>
         </div>
       </div>
@@ -858,114 +893,100 @@
 
     <!-- ABOUT -->
     <section id="about" aria-labelledby="about-heading">
-      <div class="section-header section-header--quiet">
+      <div class="section-header">
         <div>
-          <div class="eyebrow">About</div>
-          <h2 id="about-heading">25 years in IT leadership. <em style="font-style:normal">Now focused on AI.</em></h2>
+          <h2 id="about-heading">25 years in IT leadership. <em style="font-style:normal;font-weight:300;">Now focused on AI.</em></h2>
         </div>
         <div class="section-marker">
-          <span>§04</span>
-          <span class="slash">/</span>
+          <span class="dot"></span>
           <span class="label">Director</span>
-          <span>→</span>
-          <svg width="18" height="18" viewBox="0 0 40 40" fill="none" aria-hidden="true" style="opacity:0.4;flex-shrink:0;">
-            <path d="M20 4 L34 12 L20 20 L6 12 Z" stroke="#B84A20" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
-            <path d="M6 12 L6 28 L20 36 L20 20 Z" stroke="#B84A20" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
-            <path d="M34 12 L34 28 L20 36 L20 20 Z" stroke="#B84A20" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
-          </svg>
-        </div>
-      </div>
-
-      <div class="about-grid">
-        <div class="about-text">
-          <p><strong>Masters AI</strong> is headed by Ben Masters Williams, a technology executive with more than 25 years of experience managing technology and security functions across professional services and enterprise environments in Europe, the UK, and Australia.</p>
-          <p class="muted">After early roles on the helpdesk at Coca-Cola in Brussels and AMP in London, Ben moved into cybersecurity at McAfee, working as a trusted advisor to large enterprise clients including Barclays Bank and BAA Plc. He later relocated to Melbourne and spent 14 years at leading architecture firm Bates Smart, where he served as Head of IT and Associate Director.</p>
-          <p class="muted">During his tenure, he led a series of transformation initiatives, implemented a hybrid-cloud strategy, reduced IT costs for three consecutive years, managed the firm's technology response to the pandemic and built a technology function that consistently earned the trust of the business.</p>
-          <p class="muted">Masters AI has a clear understanding that new technology only matters if it is deployed responsibly and adopted by real people doing real work. We help organisations turn AI into practical outcomes that improve how they operate. Our focus is on real value, with a clear, vendor-neutral approach and governance built-in from the start.</p>
-          <div class="certs">
-            <span class="cert-chip">AI Transformation Leader</span>
-            <span class="cert-chip">Azure Solutions Architect Expert</span>
-            <div style="width:100%"></div>
-            <span class="cert-chip">CISSP</span>
-            <span class="cert-chip">CISM</span>
-            <span class="cert-chip">MACS Snr CP (Cyber)</span>
-            <div style="width:100%"></div>
-            <span class="cert-chip">ITILv4</span>
-            <span class="cert-chip">PRINCE2</span>
-          </div>
-        </div>
-        <div class="about-profile">
-          <div class="portrait">
-            <img src="assets/BW Headshot.png" alt="Ben Williams">
-          </div>
-          <div>
-            <div class="profile-name">Ben Williams</div>
-            <div class="profile-title">Director · Masters AI</div>
-          </div>
         </div>
       </div>
 
       <!-- In one line + Stats -->
       <div class="stats-row">
         <div class="in-one-line">
-          <svg class="cube-mark" width="48" height="48" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-            <path d="M20 4 L34 12 L20 20 L6 12 Z" stroke="white" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
-            <path d="M6 12 L6 28 L20 36 L20 20 Z" stroke="white" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
-            <path d="M34 12 L34 28 L20 36 L20 20 Z" stroke="white" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+          <svg class="cube-mark" width="120" height="120" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+            <path d="M20 4 L34 12 L20 20 L6 12 Z" stroke="#FAF6EC" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+            <path d="M6 12 L6 28 L20 36 L20 20 Z" stroke="#FAF6EC" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+            <path d="M34 12 L34 28 L20 36 L20 20 Z" stroke="#FAF6EC" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
           </svg>
-          <div class="eyebrow">In one line</div>
-          <blockquote>AI advice from someone who's <em>actually run IT.</em></blockquote>
+          <blockquote>AI advice from someone who's<br><em style="font-style:normal">actually run IT.</em></blockquote>
         </div>
-        <div class="stat-card">
-          <div class="stat-num">25+</div>
-          <div class="stat-label">Years in enterprise IT &amp; security leadership</div>
+        <div class="stat-cards">
+          <div class="stat-card">
+            <div class="stat-num">25+</div>
+            <div class="stat-label">Years in enterprise IT &amp; security leadership</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">7</div>
+            <div class="stat-label">Industry-recognised certifications held by the director</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">1:1</div>
+            <div class="stat-label">Direct engagement from end-to-end</div>
+          </div>
         </div>
-        <div class="stat-card">
-          <div class="stat-num">7</div>
-          <div class="stat-label">Industry-recognised certifications held by the director</div>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-text">
+          <div class="eyebrow" style="margin-bottom:16px;color:var(--muted);"><span class="dot"></span>About</div>
+          <p><strong>Masters AI Advisory</strong> is headed by Ben Masters Williams, a technology executive with more than 25 years of experience managing technology and security functions across professional services and enterprise environments in Europe, the UK, and Australia.</p>
+          <p class="muted">After early roles on the helpdesk at Coca-Cola in Brussels and AMP in London, Ben moved into cybersecurity at McAfee, working as a trusted advisor to large enterprise clients including Barclays Bank and BAA Plc. He later relocated to Melbourne and spent 14 years at leading architecture firm Bates Smart, where he served as Head of IT and Associate Director.</p>
+          <p class="muted">During his tenure, he led a series of transformation initiatives, implemented a hybrid-cloud strategy, reduced IT costs for three consecutive years, managed the firm's technology response to the pandemic and built a technology function that consistently earned the trust of the business.</p>
+          <p class="muted">Masters AI Advisory has a clear understanding that new technology only matters if it is deployed responsibly and adopted by real people doing real work. We help organisations turn AI into practical outcomes that improve how they operate. Our focus is on real value, with a clear, vendor-neutral approach and governance built-in from the start.</p>
         </div>
-        <div class="stat-card">
-          <div class="stat-num">1:1</div>
-          <div class="stat-label">Direct engagement from end-to-end</div>
+        <div class="about-profile">
+          <div class="portrait">
+            <img src="assets/BW Headshot.png" alt="Ben Williams">
+          </div>
+          <div class="about-profile-content">
+            <div>
+              <div class="profile-name">Ben Williams</div>
+              <div class="profile-title">Director · Masters AI Advisory</div>
+            </div>
+            <div class="certs">
+              <span class="cert-chip">AI Transformation Leader</span>
+              <span class="cert-chip">CISSP</span>
+              <span class="cert-chip">Azure Solutions Architect Expert</span>
+              <span class="cert-chip">CISM</span>
+              <span class="cert-chip">MACS Snr CP (Cyber)</span>
+              <span class="cert-chip">ITILv4</span>
+              <span class="cert-chip">PRINCE2</span>
+            </div>
+          </div>
         </div>
       </div>
 
       <!-- Independent Advice -->
       <div class="advice">
-        <!-- Cube watermark -->
         <svg class="cube-mark" width="200" height="200" viewBox="0 0 40 40" fill="none" aria-hidden="true">
           <path d="M20 4 L34 12 L20 20 L6 12 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
           <path d="M6 12 L6 28 L20 36 L20 20 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
           <path d="M34 12 L34 28 L20 36 L20 20 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
         </svg>
         <div>
-          <div class="eyebrow">Independent Advice</div>
-          <h3>Independent advice with <em style="font-style:normal">no vendor bias.</em></h3>
+          <h3>Independent advice with<br><em style="font-style:normal">no vendor bias.</em></h3>
         </div>
-        <p>Being independent allows us to give honest, objective recommendations based on what fits your context — your data, your existing systems and your team's readiness for change.</p>
+        <p>We provide honest, objective advice based on what actually fits your context: your data, your systems and your readiness for change.</p>
       </div>
+
     </section>
 
     <!-- CTA -->
     <section id="contact" aria-labelledby="cta-heading">
       <div class="cta">
-        <!-- Cube watermark -->
         <svg class="cube-mark" width="180" height="180" viewBox="0 0 40 40" fill="none" aria-hidden="true">
           <path d="M20 4 L34 12 L20 20 L6 12 Z" stroke="#FAF6EC" stroke-width="1" stroke-linejoin="round" fill="none"/>
           <path d="M6 12 L6 28 L20 36 L20 20 Z" stroke="#FAF6EC" stroke-width="1" stroke-linejoin="round" fill="none"/>
           <path d="M34 12 L34 28 L20 36 L20 20 Z" stroke="#FAF6EC" stroke-width="1" stroke-linejoin="round" fill="none"/>
         </svg>
         <div class="section-marker">
-          <span>§05</span>
-          <span class="slash">/</span>
+          <span class="dot"></span>
           <span class="label">Contact</span>
-          <svg width="18" height="18" viewBox="0 0 40 40" fill="none" aria-hidden="true" style="opacity:0.4;flex-shrink:0;">
-            <path d="M20 4 L34 12 L20 20 L6 12 Z" stroke="#B84A20" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
-            <path d="M6 12 L6 28 L20 36 L20 20 Z" stroke="#B84A20" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
-            <path d="M34 12 L34 28 L20 36 L20 20 Z" stroke="#B84A20" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
-          </svg>
         </div>
-        <h2 id="cta-heading">Ready to <em style="font-style:normal">get started?</em></h2>
+        <h2 id="cta-heading">Ready to <em style="font-style:normal;font-weight:300;">get started?</em></h2>
         <p>Get in touch to discuss how we can help.</p>
         <a href="contact.html" class="pill pill--cta">Get in touch ↗</a>
       </div>
@@ -973,8 +994,8 @@
 
     <!-- FOOTER -->
     <footer class="site-footer">
-      <span>© 2026 Masters AI</span>
-      <span>Trading name of Masters Technology Group Pty Ltd · ABN 667 364 392 · Melbourne, Australia</span>
+      <span>© 2026 Masters AI Advisory is a trading name of Masters Technology Group Pty Ltd</span>
+      <span>ABN 667 364 392 · Melbourne, Australia</span>
     </footer>
 
   </div>

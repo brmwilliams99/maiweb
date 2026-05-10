@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact — Masters AI</title>
-  <meta name="description" content="Get in touch with Masters AI. We respond within one business day." />
+  <title>Contact — Masters AI Advisory</title>
+  <meta name="description" content="Get in touch with Masters AI Advisory. We respond within one business day." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300..900;1,8..60,300..900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <style>
     /* ── Design Tokens ─────────────────────────────────────────────── */
     :root {
-      --bg:           #F5EFE3;
-      --bg2:          #FAF6EC;
+      --bg:           #E8EBF0;
+      --bg2:          #EEF2F8;
       --panel:        #FFFFFF;
       --panel-dark:   #0E1E3A;
       --panel-dark2:  #142B52;
@@ -20,9 +20,10 @@
       --muted:        #6B6256;
       --accent:       #1F77E0;
       --accent-light: #7FB6FF;
+      --rust:         #B84A20;
       --rule:         #E0D6C4;
 
-      --display: 'Source Serif 4', 'Source Serif Pro', Georgia, serif;
+      --display: 'Raleway', sans-serif;
       --body:    Inter, system-ui, sans-serif;
       --mono:    'JetBrains Mono', ui-monospace, monospace;
     }
@@ -60,7 +61,7 @@
       transition: opacity 0.15s;
     }
     .pill:hover { opacity: 0.8; }
-    .pill--nav    { background: var(--bg2); color: var(--panel-dark); border: none; }
+    .pill--nav    { background: #FAF6EC; color: var(--panel-dark) !important; border: none; }
     .pill--active { background: var(--accent); color: #fff; border: none; }
     .pill--active:hover { opacity: 0.9; }
 
@@ -69,7 +70,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px 32px;
+      padding: 28px 40px;
       background: var(--panel-dark);
       border-radius: 6px;
     }
@@ -98,6 +99,8 @@
     }
     .kicker--light { color: rgba(245,239,227,0.45); }
     .kicker--light .dot { background: var(--accent-light); }
+    .channels-panel .dot { background: var(--rust); animation: none; }
+    .form-panel .dot { background: var(--accent); animation: none; }
     .dot {
       width: 6px;
       height: 6px;
@@ -128,11 +131,11 @@
     .contact-hero h1 {
       font-family: var(--display);
       font-size: clamp(48px, 5vw, 72px);
-      font-weight: 400;
-      letter-spacing: -0.03em;
+      font-weight: 300;
+      letter-spacing: -0.01em;
       line-height: 1.05;
     }
-    .contact-hero h1 em { color: var(--accent); font-style: normal; }
+    .contact-hero h1 em { color: var(--accent); font-style: normal; font-weight: 500; }
     .contact-hero .lede {
       font-size: 16px;
       color: var(--muted);
@@ -159,6 +162,8 @@
       flex-direction: column;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
       cursor: default;
+      position: relative;
+      overflow: hidden;
     }
     .channels-panel:hover {
       transform: translateY(-3px);
@@ -167,13 +172,13 @@
     .channels-panel h2 {
       font-family: var(--display);
       font-size: 36px;
-      font-weight: 400;
-      letter-spacing: -0.02em;
+      font-weight: 300;
+      letter-spacing: -0.01em;
       line-height: 1.15;
       margin: 14px 0 16px;
       color: var(--bg);
     }
-    .channels-panel h2 .em { color: var(--accent-light); font-style: italic; font-family: var(--display); }
+    .channels-panel h2 .em { color: var(--accent-light); font-style: normal; font-weight: 500; font-family: var(--display); }
     .channels-panel > p {
       font-size: 14px;
       line-height: 1.6;
@@ -241,6 +246,8 @@
       gap: 24px;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
       cursor: default;
+      position: relative;
+      overflow: hidden;
     }
     .form-panel:hover {
       transform: translateY(-3px);
@@ -249,12 +256,12 @@
     .form-panel h2 {
       font-family: var(--display);
       font-size: 36px;
-      font-weight: 400;
-      letter-spacing: -0.02em;
+      font-weight: 300;
+      letter-spacing: -0.01em;
       line-height: 1.15;
       margin-top: 10px;
     }
-    .form-panel h2 .em { color: var(--accent); font-style: italic; font-family: var(--display); }
+    .form-panel h2 .em { color: var(--accent); font-style: normal; font-weight: 500; font-family: var(--display); }
 
     .form-fields { display: flex; flex-direction: column; gap: 16px; }
     .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
@@ -324,12 +331,23 @@
     .form-success .thanks {
       font-family: var(--display);
       font-size: 64px;
-      font-weight: 400;
+      font-weight: 200;
       color: var(--accent);
-      font-style: italic;
+      font-style: normal;
       line-height: 1;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
     .form-success p { margin-top: 16px; color: var(--muted); font-size: 16px; }
+
+    /* ── Rust structural accents ────────────────────────────────────── */
+    .contact-hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 52px; height: 3px;
+      background: var(--rust);
+    }
 
     /* ── Footer ─────────────────────────────────────────────────────── */
     .site-footer {
@@ -349,26 +367,22 @@
     @media (max-width: 768px) {
       .site-wrapper { padding: 12px; }
 
-      /* Nav */
       .nav { padding: 14px 16px; flex-wrap: wrap; gap: 10px; }
       .nav-links { gap: 16px; font-size: 12px; }
       .nav-tagline, .nav-divider { display: none; }
+      .nav-wordmark span { font-size: 18px !important; letter-spacing: .08em !important; }
 
-      /* Contact hero */
       .contact-hero { padding: 32px 24px; gap: 14px; }
 
-      /* Contact grid */
       .contact-grid { grid-template-columns: 1fr; }
       .channels-panel { padding: 28px 24px; }
       .channels-panel h2 { font-size: 26px; }
       .channels-meta { grid-template-columns: 1fr; gap: 16px; }
 
-      /* Form panel */
       .form-panel { padding: 28px 24px; }
       .form-panel h2 { font-size: 26px; }
       .field-row { grid-template-columns: 1fr; }
 
-      /* Footer */
       .site-footer { flex-direction: column; gap: 6px; text-align: center; }
     }
   </style>
@@ -379,11 +393,26 @@
     <!-- NAVIGATION -->
     <nav class="nav">
       <div style="display:flex;align-items:center;gap:20px;flex-shrink:0;">
-        <a href="index.html">
-          <img src="assets/mai-nav-logo.svg" alt="Masters AI" style="height: 64px; width: auto; max-width: none; flex-shrink:0;">
+        <a href="index.html" style="display:flex;align-items:center;gap:14px;text-decoration:none;flex-shrink:0;" aria-label="Masters AI">
+          <svg width="54" height="54" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+            <path d="M20 4 L34 12 L20 20 L6 12 Z" fill="#ffffff" fill-opacity=".06"/>
+            <path d="M6 12 L6 28 L20 36 L20 20 Z"  fill="#ffffff" fill-opacity=".03"/>
+            <path d="M34 12 L34 28 L20 36 L20 20 Z" fill="#ffffff" fill-opacity=".05"/>
+            <path d="M20 4 L34 12 L20 20 L6 12 Z" stroke="#ffffff" stroke-opacity=".85" stroke-width="1.1" stroke-linejoin="round"/>
+            <path d="M6 12 L6 28 L20 36 L20 20 Z"  stroke="#ffffff" stroke-opacity=".85" stroke-width="1.1" stroke-linejoin="round"/>
+            <path d="M34 12 L34 28 L20 36 L20 20 Z" stroke="#ffffff" stroke-opacity=".85" stroke-width="1.1" stroke-linejoin="round"/>
+            <circle cx="20" cy="4"  r="1.7" fill="#7FB6FF"/>
+            <circle cx="34" cy="12" r="1.7" fill="#7FB6FF"/>
+            <circle cx="6"  cy="12" r="1.7" fill="#7FB6FF"/>
+            <circle cx="20" cy="20" r="1.7" fill="#7FB6FF"/>
+            <circle cx="34" cy="28" r="1.7" fill="#7FB6FF"/>
+            <circle cx="6"  cy="28" r="1.7" fill="#B84A20"/>
+            <circle cx="20" cy="36" r="1.7" fill="#7FB6FF"/>
+          </svg>
+          <div class="nav-wordmark" style="display:flex;align-items:baseline;line-height:1;">
+            <span style="font-family:'Raleway',sans-serif;font-size:28px;font-weight:200;letter-spacing:.13em;text-transform:uppercase;color:#ffffff">Masters&thinsp;</span><span style="font-family:'Raleway',sans-serif;font-size:28px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:#ffffff">AI</span><span style="font-family:'Raleway',sans-serif;font-size:28px;font-weight:200;letter-spacing:.13em;text-transform:uppercase;color:#ffffff">&thinsp;Advisory</span>
+          </div>
         </a>
-        <span class="nav-divider" style="width:1px;height:28px;background:rgba(245,239,227,0.15);display:block;flex-shrink:0;"></span>
-        <span class="nav-tagline" style="font-family:var(--mono);font-size:11px;letter-spacing:0.1em;color:rgba(245,239,227,0.55);text-transform:uppercase;">AI Strategy · AI Implementation · AI Governance</span>
       </div>
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
@@ -400,7 +429,7 @@
         <path d="M34 12 L34 28 L20 36 L20 20 Z" stroke="#1F77E0" stroke-width="1" stroke-linejoin="round" fill="none"/>
       </svg>
       <div class="kicker"><span class="dot"></span>Contact · Melbourne, Australia</div>
-      <h1>Let's have a<br><em>conversation.</em></h1>
+      <h1>Let's have a<br><em style="font-weight:300;">conversation.</em></h1>
       <p class="lede">Whether you have a clear brief or just a question, get in touch to discuss how we can help.</p>
     </div>
 
@@ -410,7 +439,7 @@
       <!-- Channels panel -->
       <div class="channels-panel">
         <div class="kicker kicker--light"><span class="dot"></span>Direct line</div>
-        <h2>Talk to <span class="em" style="font-style:normal">Ben <em>directly.</em></span></h2>
+        <h2>Talk to <span class="em">Ben <em style="font-style:italic">directly.</em></span></h2>
         <p>All engagements begin with a conversation with the director, so you get straight answers and consistent guidance from day one.</p>
 
         <div class="contact-channels">
@@ -449,7 +478,7 @@
       <form class="form-panel" id="contact-form" action="https://formspree.io/f/mykoknnl" method="POST">
         <div>
           <div class="kicker"><span class="dot"></span>Send a message</div>
-          <h2>Or drop us a <span class="em" style="font-style:normal">quick note.</span></h2>
+          <h2>Or drop us a <span class="em" style="font-style:normal;font-weight:300;">quick note.</span></h2>
         </div>
 
         <div class="form-fields">
@@ -500,14 +529,13 @@
 
     <!-- FOOTER -->
     <footer class="site-footer">
-      <span>© 2026 Masters AI</span>
-      <span>Trading name of Masters Technology Group Pty Ltd · ABN 667 364 392 · Melbourne, Australia</span>
+      <span>© 2026 Masters AI Advisory is a trading name of Masters Technology Group Pty Ltd</span>
+      <span>ABN 667 364 392 · Melbourne, Australia</span>
     </footer>
 
   </div>
 
   <script>
-    // Pre-fill form topic from query string ?topic=
     const params = new URLSearchParams(location.search);
     const t = params.get('topic');
     if (t) {
@@ -515,7 +543,6 @@
       if (t in map) document.getElementById('topic').selectedIndex = map[t];
     }
 
-    // Formspree submission
     const form = document.getElementById('contact-form');
     form.addEventListener('submit', async function (e) {
       e.preventDefault();
