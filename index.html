@@ -153,8 +153,9 @@
       color: var(--bg2);
       list-style: none;
     }
-    .nav-links a { color: var(--bg2); transition: opacity 0.15s; }
-    .nav-links a:hover { opacity: 0.7; }
+    .nav-links a { color: rgba(255,255,255,0.6); transition: opacity 0.15s; }
+    .nav-links a:hover { opacity: 1; color: #ffffff; }
+    .nav-links a.active { color: #ffffff; border-bottom: 2px solid var(--rust); padding-bottom: 2px; }
     .pill--nav { background: #FFFFFF; color: var(--panel-dark) !important; }
     .pill--nav:hover { opacity: 0.85; }
 
@@ -314,13 +315,17 @@
       color: var(--accent);
       border-bottom: 1px solid var(--accent);
     }
-    /* Rust top-bar on all strand cards */
-    .strand::before {
+    /* Rust top-bar on selected strand cards */
+    .strand--accent::before {
       content: '';
       position: absolute;
       top: 0; left: 0;
       width: 48px; height: 3px;
       background: var(--rust);
+    }
+    /* Vertical left accent on Leadership */
+    .strand--wide.strand--accent::before {
+      width: 3px; height: 48px;
     }
 
     /* ── Testimonials ────────────────────────────────────────────────── */
@@ -687,27 +692,27 @@
       <div style="display:flex;align-items:center;gap:20px;flex-shrink:0;">
         <a href="index.html" style="display:flex;align-items:center;gap:14px;text-decoration:none;flex-shrink:0;" aria-label="Masters AI">
           <svg width="54" height="54" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-            <path d="M20 4 L34 12 L20 20 L6 12 Z" fill="#ffffff" fill-opacity=".06"/>
-            <path d="M6 12 L6 28 L20 36 L20 20 Z"  fill="#ffffff" fill-opacity=".03"/>
-            <path d="M34 12 L34 28 L20 36 L20 20 Z" fill="#ffffff" fill-opacity=".05"/>
-            <path d="M20 4 L34 12 L20 20 L6 12 Z" stroke="#ffffff" stroke-opacity=".85" stroke-width="1.1" stroke-linejoin="round"/>
-            <path d="M6 12 L6 28 L20 36 L20 20 Z"  stroke="#ffffff" stroke-opacity=".85" stroke-width="1.1" stroke-linejoin="round"/>
-            <path d="M34 12 L34 28 L20 36 L20 20 Z" stroke="#ffffff" stroke-opacity=".85" stroke-width="1.1" stroke-linejoin="round"/>
-            <circle cx="20" cy="4"  r="1.7" fill="#7FB6FF"/>
-            <circle cx="34" cy="12" r="1.7" fill="#7FB6FF"/>
-            <circle cx="6"  cy="12" r="1.7" fill="#7FB6FF"/>
-            <circle cx="20" cy="20" r="1.7" fill="#7FB6FF"/>
-            <circle cx="34" cy="28" r="1.7" fill="#7FB6FF"/>
-            <circle cx="6"  cy="28" r="1.7" fill="#B84A20"/>
-            <circle cx="20" cy="36" r="1.7" fill="#7FB6FF"/>
+            <path d="M20 4 L34 12 L20 20 L6 12 Z" fill="#7FB6FF" fill-opacity=".28"/>
+            <path d="M6 12 L6 28 L20 36 L20 20 Z"  fill="#ffffff" fill-opacity=".08"/>
+            <path d="M34 12 L34 28 L20 36 L20 20 Z" fill="#ffffff" fill-opacity=".16"/>
+            <path d="M20 4 L34 12 L20 20 L6 12 Z" stroke="#ffffff" stroke-opacity="1" stroke-width="1.6" stroke-linejoin="round"/>
+            <path d="M6 12 L6 28 L20 36 L20 20 Z"  stroke="#ffffff" stroke-opacity="1" stroke-width="1.6" stroke-linejoin="round"/>
+            <path d="M34 12 L34 28 L20 36 L20 20 Z" stroke="#ffffff" stroke-opacity="1" stroke-width="1.6" stroke-linejoin="round"/>
+            <circle cx="20" cy="4"  r="2.2" fill="#7FB6FF"/>
+            <circle cx="34" cy="12" r="2.2" fill="#7FB6FF"/>
+            <circle cx="6"  cy="12" r="2.2" fill="#7FB6FF"/>
+            <circle cx="20" cy="20" r="2.2" fill="#7FB6FF"/>
+            <circle cx="34" cy="28" r="2.2" fill="#7FB6FF"/>
+            <circle cx="6"  cy="28" r="2.2" fill="#B84A20"/>
+            <circle cx="20" cy="36" r="2.2" fill="#7FB6FF"/>
           </svg>
           <div class="nav-wordmark" style="display:flex;align-items:baseline;line-height:1;">
-            <span style="font-family:'Raleway',sans-serif;font-size:28px;font-weight:200;letter-spacing:.13em;text-transform:uppercase;color:#ffffff">Masters&thinsp;</span><span style="font-family:'Raleway',sans-serif;font-size:28px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:#ffffff">AI</span><span style="font-family:'Raleway',sans-serif;font-size:28px;font-weight:200;letter-spacing:.13em;text-transform:uppercase;color:#ffffff">&thinsp;Advisory</span>
+            <span style="font-family:'Raleway',sans-serif;font-size:28px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:#ffffff">Masters&thinsp;</span><span style="font-family:'Raleway',sans-serif;font-size:28px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:#ffffff">AI</span><span style="font-family:'Raleway',sans-serif;font-size:28px;font-weight:300;letter-spacing:.13em;text-transform:uppercase;color:#ffffff">&thinsp;Advisory</span>
           </div>
         </a>
       </div>
       <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html" class="active">Home</a></li>
         <li><a href="services.html">Services</a></li>
         <li><a href="#about">About</a></li>
         <li>
@@ -768,7 +773,7 @@
         <div class="strands">
 
           <!-- Row 1 — three equal panels -->
-          <div class="strand">
+          <div class="strand strand--accent">
             <svg aria-hidden="true" style="position:absolute;bottom:-12px;right:-12px;pointer-events:none;opacity:0.06;" width="110" height="110" viewBox="0 0 40 40" fill="none">
               <path d="M20 4 L34 12 L20 20 L6 12 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
               <path d="M6 12 L6 28 L20 36 L20 20 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
@@ -817,7 +822,7 @@
             <div class="strand-cta"><a href="services.html#training">Learn more →</a></div>
           </div>
 
-          <div class="strand strand--wide">
+          <div class="strand strand--wide strand--accent">
             <svg aria-hidden="true" style="position:absolute;bottom:-12px;right:-12px;pointer-events:none;opacity:0.06;" width="110" height="110" viewBox="0 0 40 40" fill="none">
               <path d="M20 4 L34 12 L20 20 L6 12 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
               <path d="M6 12 L6 28 L20 36 L20 20 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
