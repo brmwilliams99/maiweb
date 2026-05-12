@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services — Masters AI Advisory</title>
+  <meta name="description" content="AI strategy, governance, implementation, training and fractional leadership for Australian organisations. Every engagement led directly by Ben Williams.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ── Design Tokens ─────────────────────────────────────────────── */
+    :root {
+      --bg:           #E8EBF0;
+      --bg2:          #DDE2EB;
+      --panel:        #FFFFFF;
+      --panel-dark:   #0E1E3A;
+      --panel-dark2:  #142B52;
+      --fg:           #0E1E3A;
+      --muted:        #6B6256;
+      --accent:       #1F77E0;
+      --accent-light: #7FB6FF;
+      --rust:         #B84A20;
+      --rule:         #E0D6C4;
+      --rule-dark:    rgba(245,239,227,0.12);
+
+      --display: 'Raleway', sans-serif;
+      --body:    Inter, system-ui, sans-serif;
+      --mono:    'JetBrains Mono', ui-monospace, monospace;
+    }
+
+    /* ── Reset ─────────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+    body { background: var(--bg); color: var(--fg); font-family: var(--body); line-height: 1.5; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ── Layout shell ───────────────────────────────────────────────── */
+    .site-wrapper { max-width: 1280px; margin: 0 auto; padding: 32px; }
+
+    /* ── Utility ────────────────────────────────────────────────────── */
+    .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--rust);
+      display: inline-block;
+      flex-shrink: 0;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-family: var(--body);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+    .pill:hover { opacity: 0.8; }
+    .pill--nav { background: #FFFFFF; color: var(--panel-dark) !important; border: none; }
+    .pill--cta { background: #FFFFFF; color: var(--panel-dark); border: none; }
+
+    /* ── Section header ─────────────────────────────────────────────── */
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-top: 16px;
+      margin-bottom: 16px;
+      padding: 0 8px;
+    }
+    .section-header h2 {
+      font-family: var(--display);
+      font-size: 40px;
+      font-weight: 300;
+      margin: 8px 0 0;
+      letter-spacing: -0.01em;
+      line-height: 1.1;
+    }
+    .section-marker {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: var(--rust);
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .section-marker .label { color: var(--muted); }
+
+    /* ── Navigation ─────────────────────────────────────────────────── */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 28px 40px;
+      background: var(--panel-dark);
+      border-radius: 6px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+      font-size: 13px;
+      color: var(--bg2);
+      list-style: none;
+    }
+    .nav-links a { color: var(--bg2); transition: opacity 0.15s; }
+    .nav-links a:hover { opacity: 0.7; }
+    .nav-links a.active { color: #ffffff; font-weight: 500; }
+    .pill--nav { background: var(--bg2); color: var(--panel-dark) !important; }
+
+    /* ── Page hero ──────────────────────────────────────────────────── */
+    .page-hero {
+      background: var(--panel-dark);
+      border-radius: 4px;
+      padding: 48px 56px;
+      margin-top: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero-cube {
+      position: absolute;
+      top: -20px; right: -20px;
+      opacity: 0.04;
+      pointer-events: none;
+    }
+    .page-hero .eyebrow {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(245,239,227,0.45);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .page-hero .eyebrow .dot { background: var(--rust); }
+    .page-hero h1 {
+      font-family: var(--display);
+      font-size: clamp(40px, 4.5vw, 60px);
+      font-weight: 300;
+      letter-spacing: -0.01em;
+      line-height: 1.05;
+      color: #ffffff;
+      margin-bottom: 18px;
+    }
+    .page-hero h1 em { color: var(--accent-light); font-style: normal; font-weight: 500; }
+    .page-hero .lede {
+      font-size: 15px;
+      line-height: 1.65;
+      color: rgba(245,239,227,0.65);
+      max-width: 680px;
+      margin-bottom: 10px;
+    }
+    .page-hero .lede-note {
+      font-size: 14px;
+      line-height: 1.6;
+      color: rgba(245,239,227,0.45);
+      max-width: 600px;
+    }
+
+    /* ── Services container ─────────────────────────────────────────── */
+    .services-container {
+      background: var(--panel-dark);
+      border-radius: 4px;
+      padding: 36px;
+      position: relative;
+      overflow: hidden;
+    }
+    .services-container-cube {
+      position: absolute;
+      top: -20px; right: -20px;
+      opacity: 0.04;
+      pointer-events: none;
+    }
+
+    /* ── Services grid ──────────────────────────────────────────────── */
+    .services-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    /* ── Service card ───────────────────────────────────────────────── */
+    .svc-card {
+      background: var(--panel);
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: default;
+    }
+    .svc-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+    }
+    .svc-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 48px; height: 3px;
+      background: var(--rust);
+    }
+    .svc-card--full { grid-column: 1 / -1; }
+
+    .svc-cube {
+      position: absolute;
+      bottom: -12px; right: -12px;
+      opacity: 0.05;
+      pointer-events: none;
+    }
+
+    .svc-tag {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .svc-card h3 {
+      font-family: var(--display);
+      font-size: 22px;
+      font-weight: 400;
+      letter-spacing: -0.005em;
+      line-height: 1.15;
+      color: var(--fg);
+    }
+
+    .svc-desc {
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--muted);
+    }
+
+    /* 2-column bullet grid */
+    .svc-bullets {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 20px;
+      flex: 1;
+    }
+    .svc-bullet {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      padding: 8px 0;
+      font-size: 13px;
+      line-height: 1.4;
+      color: var(--fg);
+      border-bottom: 1px solid var(--rule);
+    }
+    .svc-bullet-dot {
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--rust);
+      flex-shrink: 0;
+      margin-top: 5px;
+    }
+
+    .svc-link {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border-bottom: 1px solid var(--accent);
+      padding-bottom: 2px;
+      align-self: flex-start;
+      transition: opacity 0.15s;
+    }
+    .svc-link:hover { opacity: 0.7; }
+
+    /* Full-width card internal layout */
+    .svc-card--full .svc-inner {
+      display: grid;
+      grid-template-columns: 1fr 1.8fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .svc-card--full .svc-left {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    /* ── CTA panel ──────────────────────────────────────────────────── */
+    .cta {
+      background: var(--panel-dark);
+      border-radius: 4px;
+      padding: 64px;
+      margin-top: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-cube {
+      position: absolute;
+      top: -20px; right: -20px;
+      opacity: 0.04;
+      pointer-events: none;
+    }
+    .cta-eyebrow {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(245,239,227,0.45);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .cta-eyebrow .dot { background: var(--rust); }
+    .cta h2 {
+      font-family: var(--display);
+      font-size: 44px;
+      font-weight: 300;
+      color: #ffffff;
+      margin-bottom: 18px;
+      letter-spacing: -0.01em;
+      line-height: 1;
+    }
+    .cta h2 em { color: var(--accent-light); font-style: normal; font-weight: 500; }
+    .cta p {
+      font-size: 15px;
+      color: rgba(245,239,227,0.65);
+      max-width: 520px;
+      margin-bottom: 32px;
+      line-height: 1.6;
+    }
+
+    /* ── Footer ─────────────────────────────────────────────────────── */
+    .site-footer {
+      margin-top: 32px;
+      padding: 24px 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: var(--muted);
+      border-top: 1px solid var(--rule);
+    }
+    .site-footer a { color: var(--muted); transition: color 0.15s; }
+    .site-footer a:hover { color: var(--accent); }
+
+    /* ── Mobile ─────────────────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .site-wrapper { padding: 12px; }
+
+      .nav { padding: 14px 16px; flex-wrap: wrap; gap: 10px; }
+      .nav-links { gap: 16px; font-size: 12px; }
+      .nav-wordmark span { font-size: 18px !important; letter-spacing: .08em !important; }
+
+      .page-hero { padding: 32px 24px; }
+      .page-hero h1 { font-size: 34px; }
+
+      .section-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+      .section-header h2 { font-size: 28px; }
+
+      .services-container { padding: 20px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .svc-card--full { grid-column: span 1; }
+      .svc-card--full .svc-inner { grid-template-columns: 1fr; gap: 24px; }
+      .svc-bullets { grid-template-columns: 1fr; }
+
+      .cta { padding: 40px 24px; }
+      .cta h2 { font-size: 36px; }
+
+      .site-footer { flex-direction: column; gap: 6px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="site-wrapper">
+
+    <!-- NAVIGATION -->
+    <nav class="nav">
+      <div style="display:flex;align-items:center;gap:20px;flex-shrink:0;">
+        <a href="index.html" style="display:flex;align-items:center;gap:14px;text-decoration:none;flex-shrink:0;" aria-label="Masters AI Advisory">
+          <svg width="54" height="54" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+            <path d="M20 4 L34 12 L20 20 L6 12 Z" fill="#ffffff" fill-opacity=".06"/>
+            <path d="M6 12 L6 28 L20 36 L20 20 Z"  fill="#ffffff" fill-opacity=".03"/>
+            <path d="M34 12 L34 28 L20 36 L20 20 Z" fill="#ffffff" fill-opacity=".05"/>
+            <path d="M20 4 L34 12 L20 20 L6 12 Z" stroke="#ffffff" stroke-opacity=".85" stroke-width="1.1" stroke-linejoin="round"/>
+            <path d="M6 12 L6 28 L20 36 L20 20 Z"  stroke="#ffffff" stroke-opacity=".85" stroke-width="1.1" stroke-linejoin="round"/>
+            <path d="M34 12 L34 28 L20 36 L20 20 Z" stroke="#ffffff" stroke-opacity=".85" stroke-width="1.1" stroke-linejoin="round"/>
+            <circle cx="20" cy="4"  r="1.7" fill="#7FB6FF"/>
+            <circle cx="34" cy="12" r="1.7" fill="#7FB6FF"/>
+            <circle cx="6"  cy="12" r="1.7" fill="#7FB6FF"/>
+            <circle cx="20" cy="20" r="1.7" fill="#7FB6FF"/>
+            <circle cx="34" cy="28" r="1.7" fill="#7FB6FF"/>
+            <circle cx="6"  cy="28" r="1.7" fill="#B84A20"/>
+            <circle cx="20" cy="36" r="1.7" fill="#7FB6FF"/>
+          </svg>
+          <div class="nav-wordmark" style="display:flex;align-items:baseline;line-height:1;">
+            <span style="font-family:'Raleway',sans-serif;font-size:28px;font-weight:200;letter-spacing:.13em;text-transform:uppercase;color:#ffffff">Masters&thinsp;</span><span style="font-family:'Raleway',sans-serif;font-size:28px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:#ffffff">AI</span><span style="font-family:'Raleway',sans-serif;font-size:28px;font-weight:200;letter-spacing:.13em;text-transform:uppercase;color:#ffffff">&thinsp;Advisory</span>
+          </div>
+        </a>
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html" class="active">Services</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="contact.html" class="pill pill--nav" style="font-size:12px;padding:10px 16px;">Get in touch ↗</a></li>
+      </ul>
+    </nav>
+
+    <!-- PAGE HERO -->
+    <div class="page-hero">
+      <svg class="page-hero-cube" width="360" height="360" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+        <path d="M20 4 L34 12 L20 20 L6 12 Z" stroke="#7FB6FF" stroke-width="1" stroke-linejoin="round" fill="none"/>
+        <path d="M6 12 L6 28 L20 36 L20 20 Z" stroke="#7FB6FF" stroke-width="1" stroke-linejoin="round" fill="none"/>
+        <path d="M34 12 L34 28 L20 36 L20 20 Z" stroke="#7FB6FF" stroke-width="1" stroke-linejoin="round" fill="none"/>
+      </svg>
+      <div class="eyebrow">
+        <span class="dot"></span>AI Strategy · AI Implementation · AI Governance
+      </div>
+      <h1>How we <em>help.</em></h1>
+      <p class="lede">Masters AI Advisory works with Australian organisations at every stage of their AI journey — from the first conversation about what's possible, to ongoing leadership and governance.</p>
+      <p class="lede-note">Every engagement is led directly by Ben, which means you get senior experience from day one, not after it's been filtered through a junior team.</p>
+    </div>
+
+    <!-- SECTION HEADER -->
+    <div class="section-header">
+      <div>
+        <h2>Here's how we typically help.</h2>
+      </div>
+      <div class="section-marker">
+        <span class="dot"></span>
+        <span class="label">Services</span>
+      </div>
+    </div>
+
+    <!-- SERVICES GRID -->
+    <div class="services-container">
+      <svg class="services-container-cube" width="320" height="320" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+        <path d="M20 4 L34 12 L20 20 L6 12 Z" stroke="#7FB6FF" stroke-width="1" stroke-linejoin="round" fill="none"/>
+        <path d="M6 12 L6 28 L20 36 L20 20 Z" stroke="#7FB6FF" stroke-width="1" stroke-linejoin="round" fill="none"/>
+        <path d="M34 12 L34 28 L20 36 L20 20 Z" stroke="#7FB6FF" stroke-width="1" stroke-linejoin="round" fill="none"/>
+      </svg>
+      <div class="services-grid">
+
+      <!-- 01 AI Strategy & Readiness -->
+      <div class="svc-card" id="strategy">
+        <svg class="svc-cube" width="130" height="130" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+          <path d="M20 4 L34 12 L20 20 L6 12 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+          <path d="M6 12 L6 28 L20 36 L20 20 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+          <path d="M34 12 L34 28 L20 36 L20 20 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+        </svg>
+        <div class="svc-tag">Strategy</div>
+        <h3>AI Strategy &amp; Readiness</h3>
+        <p class="svc-desc">Most organisations know they need to do something about AI. Far fewer know where to start, what's realistic for their size and sector, or how to make a decision they'll still feel good about in two years.</p>
+        <div class="svc-bullets">
+          <div class="svc-bullet"><span class="svc-bullet-dot"></span>AI readiness assessment</div>
+          <div class="svc-bullet"><span class="svc-bullet-dot"></span>Use-case discovery and prioritisation</div>
+          <div class="svc-bullet"><span class="svc-bullet-dot"></span>Strategy and roadmap development</div>
+          <div class="svc-bullet"><span class="svc-bullet-dot"></span>Data and systems review</div>
+          <div class="svc-bullet"><span class="svc-bullet-dot"></span>Shadow AI detection and audit</div>
+          <div class="svc-bullet"><span class="svc-bullet-dot"></span>Board and executive briefings</div>
+          <div class="svc-bullet"><span class="svc-bullet-dot"></span>Business case and ROI modelling</div>
+        </div>
+        <a href="contact.html?topic=strategy" class="svc-link">Talk about strategy →</a>
+      </div>
+
+      <!-- 02 AI Governance & Risk -->
+      <div class="svc-card" id="governance">
+        <svg class="svc-cube" width="130" height="130" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+          <path d="M20 4 L34 12 L20 20 L6 12 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+          <path d="M6 12 L6 28 L20 36 L20 20 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+          <path d="M34 12 L34 28 L20 36 L20 20 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+        </svg>
+        <div class="svc-tag">Governance</div>
+        <h3>AI Governance &amp; Risk</h3>
+        <p class="svc-desc">AI introduces risks that most organisations haven't had to think about before — and the regulatory landscape is moving quickly. The EU AI Act, ISO 42001, and Australia's own evolving frameworks are already shaping expectations.</p>
+        <div class="svc-bullets">
+          <div class="svc-bullet"><span class="svc-bullet-dot"></span>AI policy and acceptable use frameworks</div>
+          <div class="svc-bullet"><span class="svc-bullet-dot"></span>AI risk assessment and risk register development</div>
+          <div class="svc-bullet"><span class="svc-bullet-dot"></span>Regulatory landscape briefings</div>
+          <div class="svc-bullet"><span class="svc-bullet-dot"></span>Data governance and permissions review</div>
+          <div class="svc-bullet"><span class="svc-bullet-dot"></span>Third-party and vendor AI risk</div>
+          <div class="svc-bullet"><span class="svc-bullet-dot"></span>Shadow AI discovery</div>
+          <div class="svc-bullet"><span class="svc-bullet-dot"></span>AI ethics and responsible use guidance</div>
+        </div>
+        <a href="contact.html?topic=governance" class="svc-link">Talk about governance →</a>
+      </div>
+
+      <!-- 03 Implementation & Deployment -->
+      <div class="svc-card" id="implementation">
+        <svg class="svc-cube" width="130" height="130" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+          <path d="M20 4 L34 12 L20 20 L6 12 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+          <path d="M6 12 L6 28 L20 36 L20 20 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+          <path d="M34 12 L34 28 L20 36 L20 20 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+        </svg>
+        <div class="svc-tag">Implementation</div>
+        <h3>Implementation &amp; Deployment</h3>
+        <p class="svc-desc">There's a significant gap between deciding to use AI and actually getting value from it. Tools get deployed without proper configuration, staff don't adopt them, and organisations end up paying for capability they're not using.</p>
+        <div class="svc-bullets">
+          <div class="svc-bullet"><span class="svc-bullet-dot"></span>Microsoft Copilot deployment and adoption</div>
+          <div class="svc-bullet"><span class="svc-bullet-dot"></span>SharePoint and Teams AI integration</div>
+          <div class="svc-bullet"><span class="svc-bullet-dot"></span>Custom AI workflows and automation</div>
+          <div class="svc-bullet"><span class="svc-bullet-dot"></span>AI agent design and build</div>
+          <div class="svc-bullet"><span class="svc-bullet-dot"></span>Proof of concept design and delivery</div>
+          <div class="svc-bullet"><span class="svc-bullet-dot"></span>Post-deployment review and optimisation</div>
+          <div class="svc-bullet"><span class="svc-bullet-dot"></span>Risk and governance integration throughout</div>
+        </div>
+        <a href="contact.html?topic=implementation" class="svc-link">Talk about implementation →</a>
+      </div>
+
+      <!-- 04 Training & Enablement -->
+      <div class="svc-card" id="training">
+        <svg class="svc-cube" width="130" height="130" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+          <path d="M20 4 L34 12 L20 20 L6 12 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+          <path d="M6 12 L6 28 L20 36 L20 20 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+          <path d="M34 12 L34 28 L20 36 L20 20 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+        </svg>
+        <div class="svc-tag">Enablement</div>
+        <h3>Training &amp; Enablement</h3>
+        <p class="svc-desc">AI adoption fails when it's treated as a technology project rather than a people project. The tools are only useful if your team understands them, trusts them, and knows how to apply them to their actual work.</p>
+        <div class="svc-bullets">
+          <div class="svc-bullet"><span class="svc-bullet-dot"></span>Executive and board AI literacy sessions</div>
+          <div class="svc-bullet"><span class="svc-bullet-dot"></span>Staff AI adoption workshops</div>
+          <div class="svc-bullet"><span class="svc-bullet-dot"></span>Role-based training for specific teams</div>
+          <div class="svc-bullet"><span class="svc-bullet-dot"></span>Responsible AI use and policy awareness</div>
+          <div class="svc-bullet"><span class="svc-bullet-dot"></span>Prompt engineering and workflow training</div>
+          <div class="svc-bullet"><span class="svc-bullet-dot"></span>Train-the-trainer programs</div>
+        </div>
+        <a href="contact.html?topic=training" class="svc-link">Talk about training →</a>
+      </div>
+
+      <!-- 05 Fractional Leadership — full width -->
+      <div class="svc-card svc-card--full" id="leadership">
+        <svg class="svc-cube" width="130" height="130" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+          <path d="M20 4 L34 12 L20 20 L6 12 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+          <path d="M6 12 L6 28 L20 36 L20 20 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+          <path d="M34 12 L34 28 L20 36 L20 20 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+        </svg>
+        <div class="svc-inner">
+          <div class="svc-left">
+            <div class="svc-tag">Leadership</div>
+            <h3>Fractional Leadership</h3>
+            <p class="svc-desc">Some organisations need senior technology or AI leadership but aren't at a point where a full-time hire makes sense. Others have an IT team in place but no one at director level to set direction, manage vendors, or represent technology at the leadership table. We provide flexible, senior-level engagement that fits your situation.</p>
+            <a href="contact.html?topic=leadership" class="svc-link">Talk about leadership →</a>
+          </div>
+          <div class="svc-bullets">
+            <div class="svc-bullet"><span class="svc-bullet-dot"></span>Fractional IT Director or Head of AI</div>
+            <div class="svc-bullet"><span class="svc-bullet-dot"></span>AI governance oversight and accountability</div>
+            <div class="svc-bullet"><span class="svc-bullet-dot"></span>Technology budget and vendor review</div>
+            <div class="svc-bullet"><span class="svc-bullet-dot"></span>Board and stakeholder reporting</div>
+            <div class="svc-bullet"><span class="svc-bullet-dot"></span>Cloud and infrastructure roadmap</div>
+            <div class="svc-bullet"><span class="svc-bullet-dot"></span>Cyber security advisory (vCISO)</div>
+            <div class="svc-bullet"><span class="svc-bullet-dot"></span>IT team mentoring and capability uplift</div>
+          </div>
+        </div>
+      </div>
+
+      </div><!-- /.services-grid -->
+    </div><!-- /.services-container -->
+
+    <!-- CTA -->
+    <div class="cta">
+      <svg class="cta-cube" width="360" height="360" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+        <path d="M20 4 L34 12 L20 20 L6 12 Z" stroke="#7FB6FF" stroke-width="1" stroke-linejoin="round" fill="none"/>
+        <path d="M6 12 L6 28 L20 36 L20 20 Z" stroke="#7FB6FF" stroke-width="1" stroke-linejoin="round" fill="none"/>
+        <path d="M34 12 L34 28 L20 36 L20 20 Z" stroke="#7FB6FF" stroke-width="1" stroke-linejoin="round" fill="none"/>
+      </svg>
+      <div class="cta-eyebrow"><span class="dot"></span>Ready to start</div>
+      <h2>Not sure which service<br>fits your situation?</h2>
+      <p>Most engagements begin with a conversation, not a brief. Get in touch and we'll work out together where the best starting point is.</p>
+      <a href="contact.html" class="pill pill--cta">Get in touch ↗</a>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+      <span>© 2026 Masters AI Advisory is a trading name of Masters Technology Group Pty Ltd</span>
+      <span>ABN 667 364 392 · Melbourne, Australia</span>
+    </footer>
+
+  </div>
+</body>
+</html>
