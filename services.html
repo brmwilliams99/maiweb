@@ -164,21 +164,6 @@
       max-width: 600px;
     }
 
-    /* ── Services container ─────────────────────────────────────────── */
-    .services-container {
-      background: var(--panel-dark);
-      border-radius: 4px;
-      padding: 36px;
-      position: relative;
-      overflow: hidden;
-    }
-    .services-container-cube {
-      position: absolute;
-      top: -20px; right: -20px;
-      opacity: 0.04;
-      pointer-events: none;
-    }
-
     /* ── Services grid ──────────────────────────────────────────────── */
     .services-grid {
       display: grid;
@@ -191,10 +176,10 @@
       background: var(--panel);
       border: 1px solid var(--rule);
       border-radius: 4px;
-      padding: 32px;
+      padding: 40px;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 18px;
       position: relative;
       overflow: hidden;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -217,12 +202,12 @@
     }
     .svc-card--full { grid-column: 1 / -1; }
 
-    .svc-cube {
-      position: absolute;
-      bottom: -12px; right: -12px;
-      opacity: 0.05;
-      pointer-events: none;
+    .svc-icon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 4px;
     }
+    .svc-icon svg { display: block; width: 100%; height: 100%; }
 
     .svc-tag {
       font-family: var(--mono);
@@ -234,42 +219,153 @@
 
     .svc-card h3 {
       font-family: var(--display);
-      font-size: 22px;
+      font-size: 24px;
       font-weight: 400;
       letter-spacing: -0.005em;
-      line-height: 1.15;
+      line-height: 1.2;
       color: var(--fg);
     }
 
     .svc-desc {
-      font-size: 14px;
+      font-size: 15px;
       line-height: 1.65;
       color: var(--muted);
     }
 
-    /* 2-column bullet grid */
-    .svc-bullets {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      column-gap: 20px;
-      flex: 1;
+    /* ── Featured engagement (Adoption Roadmap) ─────────────────────── */
+    .featured-engagement {
+      background: var(--panel);
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+      padding: 48px 56px;
+      margin-top: 16px;
+      position: relative;
+      overflow: hidden;
+      color: var(--fg);
     }
-    .svc-bullet {
-      display: flex;
-      align-items: flex-start;
-      gap: 9px;
-      padding: 8px 0;
+    .featured-engagement::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 3px; height: 64px;
+      background: var(--rust);
+    }
+    .featured-engagement-cube {
+      position: absolute;
+      top: -20px; right: -20px;
+      opacity: 0.08;
+      pointer-events: none;
+    }
+    .featured-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 56px;
+      align-items: start;
+    }
+    .featured-title {
+      font-family: var(--display);
+      font-size: 40px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      line-height: 1.1;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+    .featured-desc {
+      font-size: 16px;
+      line-height: 1.65;
+      color: var(--muted);
+      margin-bottom: 22px;
+    }
+    .featured-cta {
+      display: inline-flex;
+      align-items: center;
+      padding: 12px 24px;
+      background: var(--fg);
+      color: var(--bg2);
+      border: none;
+      border-radius: 999px;
+      font-family: var(--body);
       font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+    .featured-cta:hover { opacity: 0.85; }
+    .featured-right {
+      padding-top: 8px;
+    }
+    .featured-includes-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+    .featured-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .featured-list li {
+      font-family: var(--display);
+      font-size: 18px;
       line-height: 1.4;
       color: var(--fg);
-      border-bottom: 1px solid var(--rule);
+      font-weight: 300;
+      padding-left: 18px;
+      position: relative;
     }
-    .svc-bullet-dot {
-      width: 4px; height: 4px;
-      border-radius: 50%;
+    .featured-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 13px;
+      width: 8px;
+      height: 1px;
       background: var(--rust);
-      flex-shrink: 0;
-      margin-top: 5px;
+    }
+
+    /* "What we cover" deliverables section */
+    .svc-includes {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 4px;
+      flex: 1;
+    }
+    .svc-includes::before {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 2px;
+      background: var(--rust);
+    }
+    .svc-includes-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .svc-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .svc-list li {
+      font-family: var(--body);
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--fg);
     }
 
     .svc-link {
@@ -371,11 +467,13 @@
       .section-header { flex-direction: column; align-items: flex-start; gap: 10px; }
       .section-header h2 { font-size: 28px; }
 
-      .services-container { padding: 20px; }
       .services-grid { grid-template-columns: 1fr; }
       .svc-card--full { grid-column: span 1; }
       .svc-card--full .svc-inner { grid-template-columns: 1fr; gap: 24px; }
-      .svc-bullets { grid-template-columns: 1fr; }
+
+      .featured-engagement { padding: 32px 24px; }
+      .featured-grid { grid-template-columns: 1fr; gap: 32px; }
+      .featured-title { font-size: 30px; }
 
       .cta { padding: 40px 24px; }
       .cta h2 { font-size: 36px; }
@@ -414,7 +512,7 @@
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="services.html" class="active">Services</a></li>
-        <li><a href="index.html#about">About</a></li>
+        <li><a href="about.html">About</a></li>
         <li><a href="contact.html" class="pill pill--nav" style="font-size:12px;padding:10px 16px;">Get in touch ↗</a></li>
       </ul>
     </nav>
@@ -429,14 +527,51 @@
       <div class="eyebrow">
         <span class="dot"></span>AI Strategy · AI Implementation · AI Governance
       </div>
-      <h1>How we <em>help.</em></h1>
+      <h1>How we help.</h1>
       <p class="lede">Masters AI Advisory works with Australian organisations at every stage of their AI journey — from the first conversation about what's possible, to ongoing leadership and governance.</p>
     </div>
 
-    <!-- SECTION HEADER -->
+    <!-- SECTION HEADER — Roadmap -->
     <div class="section-header">
       <div>
-        <h2>Our services.</h2>
+        <h2>Start your AI journey.</h2>
+      </div>
+      <div class="section-marker">
+        <span class="dot"></span>
+        <span class="label">Roadmap</span>
+      </div>
+    </div>
+
+    <!-- FEATURED ENGAGEMENT — Adoption Roadmap -->
+    <div class="featured-engagement">
+      <svg class="featured-engagement-cube" width="360" height="360" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+        <path d="M20 4 L34 12 L20 20 L6 12 Z" stroke="#1F77E0" stroke-width="1" stroke-linejoin="round" fill="none"/>
+        <path d="M6 12 L6 28 L20 36 L20 20 Z" stroke="#1F77E0" stroke-width="1" stroke-linejoin="round" fill="none"/>
+        <path d="M34 12 L34 28 L20 36 L20 20 Z" stroke="#1F77E0" stroke-width="1" stroke-linejoin="round" fill="none"/>
+      </svg>
+      <div class="featured-grid">
+        <div class="featured-left">
+          <h3 class="featured-title">AI Adoption Roadmap</h3>
+          <p class="featured-desc">The AI Adoption Roadmap is where most engagements begin: a tailored diagnostic that establishes where you stand, what to do first, and what good looks like.</p>
+          <a href="contact.html?topic=roadmap" class="featured-cta">Discuss the Roadmap →</a>
+        </div>
+        <div class="featured-right">
+          <div class="featured-includes-label">Typically includes</div>
+          <ul class="featured-list">
+            <li>AI readiness assessment</li>
+            <li>Security maturity benchmark</li>
+            <li>Prioritised use-cases</li>
+            <li>Sequenced action plan</li>
+            <li>Governance framework</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION HEADER — Ongoing services -->
+    <div class="section-header" style="margin-top:48px;">
+      <div>
+        <h2>Ongoing capabilities.</h2>
       </div>
       <div class="section-marker">
         <span class="dot"></span>
@@ -445,129 +580,123 @@
     </div>
 
     <!-- SERVICES GRID -->
-    <div class="services-container">
-      <svg class="services-container-cube" width="320" height="320" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-        <path d="M20 4 L34 12 L20 20 L6 12 Z" stroke="#7FB6FF" stroke-width="1" stroke-linejoin="round" fill="none"/>
-        <path d="M6 12 L6 28 L20 36 L20 20 Z" stroke="#7FB6FF" stroke-width="1" stroke-linejoin="round" fill="none"/>
-        <path d="M34 12 L34 28 L20 36 L20 20 Z" stroke="#7FB6FF" stroke-width="1" stroke-linejoin="round" fill="none"/>
-      </svg>
-      <div class="services-grid">
+    <div class="services-grid">
 
-      <!-- 01 AI Strategy & Readiness -->
-      <div class="svc-card svc-card--accent" id="strategy">
-        <svg class="svc-cube" width="130" height="130" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-          <path d="M20 4 L34 12 L20 20 L6 12 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
-          <path d="M6 12 L6 28 L20 36 L20 20 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
-          <path d="M34 12 L34 28 L20 36 L20 20 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
-        </svg>
-        <div class="svc-tag">Strategy</div>
-        <h3>AI Strategy &amp; Readiness</h3>
-        <p class="svc-desc">Most organisations know they need to do something about AI. Far fewer know where to start, what's realistic for their size and sector, or how to make a decision they'll still feel good about in two years.</p>
-        <div class="svc-bullets">
-          <div class="svc-bullet"><span class="svc-bullet-dot"></span>AI readiness assessment</div>
-          <div class="svc-bullet"><span class="svc-bullet-dot"></span>Use-case discovery and prioritisation</div>
-          <div class="svc-bullet"><span class="svc-bullet-dot"></span>Strategy and roadmap development</div>
-          <div class="svc-bullet"><span class="svc-bullet-dot"></span>Data and systems review</div>
-          <div class="svc-bullet"><span class="svc-bullet-dot"></span>Shadow AI detection and audit</div>
-          <div class="svc-bullet"><span class="svc-bullet-dot"></span>Board and executive briefings</div>
-          <div class="svc-bullet"><span class="svc-bullet-dot"></span>Business case and ROI modelling</div>
-        </div>
-        <a href="contact.html?topic=strategy" class="svc-link">Talk about strategy →</a>
-      </div>
-
-      <!-- 02 Implementation & Deployment -->
+      <!-- 01 Implementation & Deployment -->
       <div class="svc-card" id="implementation">
-        <svg class="svc-cube" width="130" height="130" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-          <path d="M20 4 L34 12 L20 20 L6 12 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
-          <path d="M6 12 L6 28 L20 36 L20 20 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
-          <path d="M34 12 L34 28 L20 36 L20 20 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
-        </svg>
+        <div class="svc-icon">
+          <svg viewBox="0 0 40 40" fill="none" aria-hidden="true">
+            <path d="M20 6 L32 12 L20 18 L8 12 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+            <path d="M20 16 L32 22 L20 28 L8 22 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+            <path d="M20 26 L32 32 L20 38 L8 32 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+          </svg>
+        </div>
         <div class="svc-tag">Implementation</div>
         <h3>Implementation &amp; Deployment</h3>
         <p class="svc-desc">There's a significant gap between deciding to use AI and actually getting value from it. Tools get deployed without proper configuration, staff don't adopt them, and organisations end up paying for capability they're not using.</p>
-        <div class="svc-bullets">
-          <div class="svc-bullet"><span class="svc-bullet-dot"></span>Microsoft Copilot deployment and adoption</div>
-          <div class="svc-bullet"><span class="svc-bullet-dot"></span>SharePoint and Teams AI integration</div>
-          <div class="svc-bullet"><span class="svc-bullet-dot"></span>Custom AI workflows and automation</div>
-          <div class="svc-bullet"><span class="svc-bullet-dot"></span>AI agent design and build</div>
-          <div class="svc-bullet"><span class="svc-bullet-dot"></span>Proof of concept design and delivery</div>
-          <div class="svc-bullet"><span class="svc-bullet-dot"></span>Post-deployment review and optimisation</div>
-          <div class="svc-bullet"><span class="svc-bullet-dot"></span>Risk and governance integration throughout</div>
+        <div class="svc-includes">
+          <div class="svc-includes-label">What we cover</div>
+          <ul class="svc-list">
+            <li>Microsoft Copilot deployment and adoption</li>
+            <li>SharePoint and Teams AI integration</li>
+            <li>Custom AI workflows and automation</li>
+            <li>AI agent design and build</li>
+            <li>Proof of concept design and delivery</li>
+            <li>Post-deployment review and optimisation</li>
+            <li>Risk and governance integration throughout</li>
+          </ul>
         </div>
         <a href="contact.html?topic=implementation" class="svc-link">Talk about implementation →</a>
       </div>
 
       <!-- 03 AI Governance & Risk -->
       <div class="svc-card" id="governance">
-        <svg class="svc-cube" width="130" height="130" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-          <path d="M20 4 L34 12 L20 20 L6 12 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
-          <path d="M6 12 L6 28 L20 36 L20 20 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
-          <path d="M34 12 L34 28 L20 36 L20 20 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
-        </svg>
+        <div class="svc-icon">
+          <svg viewBox="0 0 40 40" fill="none" aria-hidden="true">
+            <rect x="6" y="6" width="8" height="8" stroke="#1F77E0" stroke-width="1.5" fill="none"/>
+            <rect x="16" y="6" width="8" height="8" stroke="#1F77E0" stroke-width="1.5" fill="none"/>
+            <rect x="26" y="6" width="8" height="8" stroke="#1F77E0" stroke-width="1.5" fill="none"/>
+            <rect x="6" y="16" width="8" height="8" stroke="#1F77E0" stroke-width="1.5" fill="none"/>
+            <rect x="16" y="16" width="8" height="8" stroke="#1F77E0" stroke-width="1.5" fill="#1F77E0" fill-opacity="0.4"/>
+            <rect x="26" y="16" width="8" height="8" stroke="#1F77E0" stroke-width="1.5" fill="none"/>
+            <rect x="6" y="26" width="8" height="8" stroke="#1F77E0" stroke-width="1.5" fill="none"/>
+            <rect x="16" y="26" width="8" height="8" stroke="#1F77E0" stroke-width="1.5" fill="none"/>
+            <rect x="26" y="26" width="8" height="8" stroke="#1F77E0" stroke-width="1.5" fill="none"/>
+          </svg>
+        </div>
         <div class="svc-tag">Governance</div>
         <h3>AI Governance &amp; Risk</h3>
-        <p class="svc-desc">AI introduces risks that most organisations haven't had to think about before — and the regulatory landscape is moving quickly. The EU AI Act, ISO 42001, and Australia's own evolving frameworks are already shaping expectations.</p>
-        <div class="svc-bullets">
-          <div class="svc-bullet"><span class="svc-bullet-dot"></span>AI policy and acceptable use frameworks</div>
-          <div class="svc-bullet"><span class="svc-bullet-dot"></span>AI risk assessment and risk register development</div>
-          <div class="svc-bullet"><span class="svc-bullet-dot"></span>Regulatory landscape briefings</div>
-          <div class="svc-bullet"><span class="svc-bullet-dot"></span>Data governance and permissions review</div>
-          <div class="svc-bullet"><span class="svc-bullet-dot"></span>Third-party and vendor AI risk</div>
-          <div class="svc-bullet"><span class="svc-bullet-dot"></span>Shadow AI discovery</div>
-          <div class="svc-bullet"><span class="svc-bullet-dot"></span>AI ethics and responsible use guidance</div>
+        <p class="svc-desc">AI introduces operational risks that many organisations haven't encountered before and the regulatory landscape is shifting rapidly. We help you navigate this by aligning with internationally recognised standards, including the NIST AI Risk Management Framework and ISO 42001, to meet evolving Australian expectations.</p>
+        <div class="svc-includes">
+          <div class="svc-includes-label">What we cover</div>
+          <ul class="svc-list">
+            <li>AI policy and acceptable use frameworks</li>
+            <li>AI risk assessment and risk register development</li>
+            <li>Regulatory landscape briefings</li>
+            <li>Data governance and permissions review</li>
+            <li>Third-party and vendor AI risk</li>
+            <li>Shadow AI discovery</li>
+            <li>AI ethics and responsible use guidance</li>
+          </ul>
         </div>
         <a href="contact.html?topic=governance" class="svc-link">Talk about governance →</a>
       </div>
 
       <!-- 04 Training & Enablement -->
       <div class="svc-card" id="training">
-        <svg class="svc-cube" width="130" height="130" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-          <path d="M20 4 L34 12 L20 20 L6 12 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
-          <path d="M6 12 L6 28 L20 36 L20 20 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
-          <path d="M34 12 L34 28 L20 36 L20 20 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
-        </svg>
+        <div class="svc-icon">
+          <svg viewBox="0 0 40 40" fill="none" aria-hidden="true">
+            <rect x="5" y="28" width="6" height="8" stroke="#1F77E0" stroke-width="1.5" fill="none"/>
+            <rect x="13" y="22" width="6" height="14" stroke="#1F77E0" stroke-width="1.5" fill="none"/>
+            <rect x="21" y="14" width="6" height="22" stroke="#1F77E0" stroke-width="1.5" fill="none"/>
+            <rect x="29" y="6" width="6" height="30" stroke="#1F77E0" stroke-width="1.5" fill="none"/>
+          </svg>
+        </div>
         <div class="svc-tag">Enablement</div>
         <h3>Training &amp; Enablement</h3>
         <p class="svc-desc">AI adoption fails when it's treated as a technology project rather than a people project. The tools are only useful if your team understands them, trusts them, and knows how to apply them to their actual work.</p>
-        <div class="svc-bullets">
-          <div class="svc-bullet"><span class="svc-bullet-dot"></span>Executive and board AI literacy sessions</div>
-          <div class="svc-bullet"><span class="svc-bullet-dot"></span>Staff AI adoption workshops</div>
-          <div class="svc-bullet"><span class="svc-bullet-dot"></span>Role-based training for specific teams</div>
-          <div class="svc-bullet"><span class="svc-bullet-dot"></span>Responsible AI use and policy awareness</div>
-          <div class="svc-bullet"><span class="svc-bullet-dot"></span>Prompt engineering and workflow training</div>
-          <div class="svc-bullet"><span class="svc-bullet-dot"></span>Train-the-trainer programs</div>
+        <div class="svc-includes">
+          <div class="svc-includes-label">What we cover</div>
+          <ul class="svc-list">
+            <li>Executive and board AI literacy sessions</li>
+            <li>Staff AI adoption workshops</li>
+            <li>Role-based training for specific teams</li>
+            <li>Responsible AI use and policy awareness</li>
+            <li>Prompt engineering and workflow training</li>
+            <li>Train-the-trainer programs</li>
+          </ul>
         </div>
         <a href="contact.html?topic=training" class="svc-link">Talk about training →</a>
       </div>
 
-      <!-- 05 Fractional Leadership — full width -->
-      <div class="svc-card svc-card--full svc-card--accent" id="leadership">
-        <svg class="svc-cube" width="130" height="130" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-          <path d="M20 4 L34 12 L20 20 L6 12 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
-          <path d="M6 12 L6 28 L20 36 L20 20 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
-          <path d="M34 12 L34 28 L20 36 L20 20 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
-        </svg>
-        <div class="svc-inner">
-          <div class="svc-left">
-            <div class="svc-tag">Leadership</div>
-            <h3>Fractional Leadership</h3>
-            <p class="svc-desc">Some organisations need senior technology or AI leadership but aren't at a point where a full-time hire makes sense. Others have an IT team in place but no one at director level to set direction, manage vendors, or represent technology at the leadership table. We provide flexible, senior-level engagement that fits your situation.</p>
-            <a href="contact.html?topic=leadership" class="svc-link">Talk about leadership →</a>
-          </div>
-          <div class="svc-bullets">
-            <div class="svc-bullet"><span class="svc-bullet-dot"></span>Fractional IT Director or Head of AI</div>
-            <div class="svc-bullet"><span class="svc-bullet-dot"></span>AI governance oversight and accountability</div>
-            <div class="svc-bullet"><span class="svc-bullet-dot"></span>Technology budget and vendor review</div>
-            <div class="svc-bullet"><span class="svc-bullet-dot"></span>Board and stakeholder reporting</div>
-            <div class="svc-bullet"><span class="svc-bullet-dot"></span>Cloud and infrastructure roadmap</div>
-            <div class="svc-bullet"><span class="svc-bullet-dot"></span>Cyber security advisory (vCISO)</div>
-            <div class="svc-bullet"><span class="svc-bullet-dot"></span>IT team mentoring and capability uplift</div>
-          </div>
+      <!-- 04 Fractional Leadership -->
+      <div class="svc-card svc-card--accent" id="leadership">
+        <div class="svc-icon">
+          <svg viewBox="0 0 40 40" fill="none" aria-hidden="true">
+            <path d="M20 4 L34 12 L20 20 L6 12 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+            <path d="M6 12 L6 28 L20 36 L20 20 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+            <path d="M34 12 L34 28 L20 36 L20 20 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+          </svg>
         </div>
+        <div class="svc-tag">Leadership</div>
+        <h3>Fractional Leadership</h3>
+        <p class="svc-desc">Some organisations need senior technology or AI leadership but aren't ready for a full-time hire. Others have an IT team in place but no one at director level to set direction, manage vendors, or represent technology at the leadership table.</p>
+        <div class="svc-includes">
+          <div class="svc-includes-label">What we cover</div>
+          <ul class="svc-list">
+            <li>Fractional IT Director or Head of AI</li>
+            <li>AI governance oversight and accountability</li>
+            <li>Technology budget and vendor review</li>
+            <li>Board and stakeholder reporting</li>
+            <li>Cloud and infrastructure roadmap</li>
+            <li>Cyber security advisory (vCISO)</li>
+            <li>IT team mentoring and capability uplift</li>
+          </ul>
+        </div>
+        <a href="contact.html?topic=leadership" class="svc-link">Talk about leadership →</a>
       </div>
 
-      </div><!-- /.services-grid -->
-    </div><!-- /.services-container -->
+    </div><!-- /.services-grid -->
 
     <!-- CTA -->
     <div class="cta">
