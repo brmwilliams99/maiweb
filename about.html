@@ -252,8 +252,19 @@
       padding: 36px;
       border-radius: 4px;
       border: 1px solid var(--rule);
+      position: relative;
+      overflow: hidden;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
       cursor: default;
+    }
+    .about-text::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 48px;
+      height: 3px;
+      background: var(--rust);
     }
     .about-text:hover {
       transform: translateY(-3px);
@@ -441,7 +452,7 @@
       </svg>
       <div class="eyebrow"><span class="dot"></span>About</div>
       <h1>Who we are.</h1>
-      <p class="lede">We believe lasting AI value comes from asking the right questions and building trust along the way — backed by 25+ years of enterprise IT leadership and an independent, vendor-neutral approach.</p>
+      <p class="lede">We believe lasting AI value is built on trust and a commitment to asking the right questions. This is backed by over 25 years of enterprise IT leadership and an independent, vendor-neutral approach.</p>
     </div>
 
     <!-- DIRECTOR SECTION -->
@@ -458,7 +469,6 @@
 
       <div class="about-grid">
         <div class="about-text">
-          <div class="eyebrow" style="margin-bottom:16px;color:var(--muted);"><span class="dot"></span>About</div>
           <p><strong>Masters AI Advisory</strong> is headed by Ben Masters Williams, a senior leader with more than 25 years of experience managing technology and security functions across professional services and enterprise environments in Europe, the UK, and Australia.</p>
           <p class="muted">After early roles at Coca-Cola in Brussels and AMP in London, Ben moved into cybersecurity at McAfee, working as a trusted advisor to large enterprise clients including Barclays Bank and BAA Plc. He later relocated to Melbourne and spent 14 years at leading architecture firm Bates Smart, where he served as Head of IT and Associate Director.</p>
           <p class="muted">During his tenure, he led a series of transformation initiatives, implemented a hybrid-cloud strategy, reduced IT costs for three consecutive years, managed the firm's technology response to the pandemic and built a technology function that consistently earned the trust of the business.</p>
