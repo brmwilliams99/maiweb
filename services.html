@@ -339,19 +339,23 @@
       margin-top: 4px;
       flex: 1;
     }
-    .svc-includes::before {
-      content: '';
-      display: block;
-      width: 32px;
-      height: 2px;
-      background: var(--rust);
-    }
     .svc-includes-label {
       font-family: var(--mono);
       font-size: 11px;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--muted);
+      padding-bottom: 12px;
+      position: relative;
+    }
+    .svc-includes-label::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 32px;
+      height: 2px;
+      background: var(--rust);
     }
     .svc-list {
       list-style: none;
@@ -366,6 +370,17 @@
       font-size: 14px;
       line-height: 1.5;
       color: var(--fg);
+      padding-left: 14px;
+      position: relative;
+    }
+    .svc-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 6px;
+      height: 1px;
+      background: var(--rust);
     }
 
     .svc-link {
@@ -513,7 +528,7 @@
         <li><a href="index.html">Home</a></li>
         <li><a href="services.html" class="active">Services</a></li>
         <li><a href="about.html">About</a></li>
-        <li><a href="contact.html" class="pill pill--nav" style="font-size:12px;padding:10px 16px;">Get in touch ↗</a></li>
+        <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
 
@@ -524,9 +539,7 @@
         <path d="M6 12 L6 28 L20 36 L20 20 Z" stroke="#7FB6FF" stroke-width="1" stroke-linejoin="round" fill="none"/>
         <path d="M34 12 L34 28 L20 36 L20 20 Z" stroke="#7FB6FF" stroke-width="1" stroke-linejoin="round" fill="none"/>
       </svg>
-      <div class="eyebrow">
-        <span class="dot"></span>AI Strategy · AI Implementation · AI Governance
-      </div>
+      <div class="eyebrow"><span class="dot"></span>Services</div>
       <h1>How we help.</h1>
       <p class="lede">Masters AI Advisory works with Australian organisations at every stage of their AI journey — from the first conversation about what's possible, to ongoing leadership and governance.</p>
     </div>
