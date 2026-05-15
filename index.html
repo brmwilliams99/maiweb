@@ -214,8 +214,8 @@
     }
     .hero-quote blockquote {
       font-family: var(--display);
-      font-size: 36px;
-      line-height: 1.2;
+      font-size: 28px;
+      line-height: 1.35;
       font-style: normal;
       font-weight: 300;
       margin-top: 0;
@@ -396,11 +396,28 @@
     .about-left .hero-quote { flex: 1; min-height: 0; }
     .about-text {
       background: var(--panel);
-      padding: 36px;
+      padding: 56px 36px 36px;
       border-radius: 4px;
       border: 1px solid var(--rule);
+      position: relative;
+      overflow: hidden;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
       cursor: default;
+    }
+    .about-text::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 48px;
+      background: var(--rust);
+    }
+    .about-text .cube-mark {
+      position: absolute;
+      bottom: -20px;
+      right: -20px;
+      opacity: 0.08;
     }
     .about-text:hover {
       transform: translateY(-3px);
@@ -485,7 +502,6 @@
       line-height: 1.15;
       letter-spacing: -0.01em;
     }
-    .advice h3 em { color: var(--accent); font-style: normal; font-weight: 500; }
     .advice p {
       font-size: 15px;
       line-height: 1.6;
@@ -552,12 +568,11 @@
     }
 
     /* ── Rust structural accents ────────────────────────────────────── */
-    .hero-quote::before,
     .advice::before {
       content: '';
       position: absolute;
       top: 0; left: 0;
-      width: 52px; height: 3px;
+      width: 3px; height: 52px;
       background: var(--rust);
     }
 
@@ -598,6 +613,9 @@
       .testimonial blockquote { font-size: 24px; }
 
       .about-grid { grid-template-columns: 1fr; }
+      .about-left { display: contents; }
+      .about-profile { order: 1; }
+      .hero-quote { order: 2; }
       .advice { grid-template-columns: 1fr; padding: 28px 24px; }
 
       .cta { padding: 40px 24px; margin-top: 32px; }
@@ -811,14 +829,18 @@
         </div>
         <div class="section-marker">
           <span class="dot"></span>
-          <span class="label">Director</span>
+          <span class="label">About</span>
         </div>
       </div>
 
       <div class="about-grid">
         <div class="about-left">
           <div class="about-text">
-            <div class="eyebrow" style="margin-bottom:16px;color:var(--muted);"><span class="dot"></span>About</div>
+            <svg class="cube-mark" width="160" height="160" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+              <path d="M20 4 L34 12 L20 20 L6 12 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+              <path d="M6 12 L6 28 L20 36 L20 20 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+              <path d="M34 12 L34 28 L20 36 L20 20 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+            </svg>
             <p><strong>Masters AI Advisory</strong> is headed by Ben Masters Williams, a senior leader with more than 25 years of experience managing technology and security functions across professional services and enterprise environments in Europe, the UK, and Australia.</p>
             <a href="about.html" class="read-more">Read more about Ben →</a>
           </div>
@@ -828,7 +850,7 @@
               <path d="M6 12 L6 28 L20 36 L20 20 Z" stroke="#FAF6EC" stroke-width="1" stroke-linejoin="round" fill="none"/>
               <path d="M34 12 L34 28 L20 36 L20 20 Z" stroke="#FAF6EC" stroke-width="1" stroke-linejoin="round" fill="none"/>
             </svg>
-            <blockquote>AI advice from someone who's<br><em style="font-style:normal">actually run IT.</em></blockquote>
+            <blockquote>"Lasting AI value comes from asking the right questions and <em style="font-style:normal">building trust along the way.</em>"</blockquote>
           </div>
         </div>
         <div class="about-profile">
@@ -861,7 +883,7 @@
           <path d="M34 12 L34 28 L20 36 L20 20 Z" stroke="#1F77E0" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
         </svg>
         <div>
-          <h3>Independent advice with<br><em style="font-style:normal">no vendor bias.</em></h3>
+          <h3>Independent advice with<br>no vendor bias.</h3>
         </div>
         <p>We provide honest, objective advice based on what actually fits your context: your data, your systems and your readiness for change.</p>
       </div>
